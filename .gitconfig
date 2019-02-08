@@ -1,0 +1,18 @@
+[user]
+	name = u1aryz
+	email = u1aryz.d@gmail.com
+[color]
+	ui = auto
+[alias]
+	graph = log --graph --all --color --pretty='%x09%h %cn%x09%s %Cred%d%Creset'
+[core]
+	quotepath = false
+	editor = /usr/bin/vim
+[diff]
+	algorithm = histogram
+[rebase]
+	autosquash = true
+[merge]
+	ff = false
+[pull]
+	ff = only
