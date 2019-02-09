@@ -1,5 +1,8 @@
 set -g theme_date_format "+%H:%M:%S"
 
+# env
+set -x ANDROID_HOME ~/Library/Android/sdk
+
 # エイリアス
 balias gst 'git status'
 balias ga 'git add'
