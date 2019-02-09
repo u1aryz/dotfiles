@@ -1,0 +1,8 @@
+" Color関連
+
+" カラースキーマを選択
+colorscheme jellybeans
+" 256色に対応
+set t_Co=256
+" ハイライトを有効化
+syntax enable

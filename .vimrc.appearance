@@ -1,0 +1,21 @@
+" 表示関連
+
+" 括弧の対応をハイライト
+set showmatch
+" 行番号表示
+set number
+" 不可視文字表示
+set list
+" 不可視文字の表示形式
+set listchars=tab:»\ ,trail:-,eol:¶
+" カーソル行をハイライト
+set cursorline
+" カーソル列をハイライト
+set cursorcolumn
+" タブを何文字分で表示するかの指定
+set tabstop=4
+
+" NERDTree開閉のキーマッピング
+map <C-e> :NERDTreeToggle<CR>
+" 隠しファイルを表示する
+let g:NERDTreeShowHidden = 1

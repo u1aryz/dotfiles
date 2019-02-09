@@ -1,0 +1,12 @@
+" 基本設定
+
+" キーマップリーダー
+let mapleader = ","
+" カーソルを行頭、行末で止まらないようにする
+set whichwrap=b,s,h,l,<,>,[,]
+" 現在のモードを表示
+set showmode
+" 常にステータスラインを表示
+set laststatus=2
+" ハイフンも単語の一部としてみなす
+setlocal iskeyword+=-
