@@ -1,9 +1,11 @@
 # plugin settings
+# fzfの古いキーバインドは使わない
 set -U FZF_LEGACY_KEYBINDINGS 0
 set -g theme_date_format "+%H:%M:%S"
 
 # env
 set -x ANDROID_HOME ~/Library/Android/sdk
+set -x EDITOR 'code --new-window'
 
 # alias
 alias gst 'git status'
