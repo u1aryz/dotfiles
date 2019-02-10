@@ -7,7 +7,7 @@
 	graph = log --graph --all --color --pretty='%x09%h %cn%x09%s %Cred%d%Creset'
 [core]
 	quotepath = false
-	editor = /usr/bin/vim
+	editor = code --wait --new-window
 [diff]
 	algorithm = histogram
 [rebase]
