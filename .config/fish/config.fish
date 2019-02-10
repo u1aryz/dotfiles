@@ -1,9 +1,11 @@
+# plugin settings
+set -U FZF_LEGACY_KEYBINDINGS 0
 set -g theme_date_format "+%H:%M:%S"
 
 # env
 set -x ANDROID_HOME ~/Library/Android/sdk
 
-# エイリアス
+# alias
 balias gst 'git status'
 balias ga 'git add'
 balias gc 'git commit'
