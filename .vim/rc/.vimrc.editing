@@ -1,9 +1,0 @@
-" 編集関連
-
-" NERD Commenterのデフォルトのキーマッピングを無効化
-let g:NERDCreateDefaultMappings = 0
-" コメントの間にスペースを1つ入れる
-let NERDSpaceDelims = 1
-" コメントアウト/解除のキーマッピングを指定
-nmap <Leader>/ <Plug>NERDCommenterToggle
-vmap <Leader>/ <Plug>NERDCommenterToggle
