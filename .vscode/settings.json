@@ -6,6 +6,7 @@
     "editor.formatOnSave": true, // ファイル保存時に自動でフォーマット
     "editor.formatOnType": true, // 入力した行を自動でフォーマット
     "editor.scrollBeyondLastLine": false, // 最終行よりも下へのスクロールをさせない
+    "editor.dragAndDrop": false, // ドラッグアンドドロップでコードの移動をしないようにする
     "files.insertFinalNewline": true, // ファイルの保存時に末尾を改行
     "files.trimTrailingWhitespace": true, // ファイルの保存時に行末の空白をトリミング
     "files.trimFinalNewlines": true, // ファイルの保存時に最終行以降をトリミング
