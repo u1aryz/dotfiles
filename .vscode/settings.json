@@ -1,1 +1,17 @@
-{}
+{
+    "editor.tabSize": 2,
+    "editor.renderControlCharacters": true, // 制御文字を表示
+    "editor.renderWhitespace": "all", // 半角スペースを常に表示
+    "editor.formatOnPaste": true, // ペースト時に自動でフォーマット
+    "editor.formatOnSave": true, // ファイル保存時に自動でフォーマット
+    "editor.formatOnType": true, // 入力した行を自動でフォーマット
+    "editor.scrollBeyondLastLine": false, // 最終行よりも下へのスクロールをさせない
+    "files.insertFinalNewline": true, // ファイルの保存時に末尾を改行
+    "files.trimTrailingWhitespace": true, // ファイルの保存時に行末の空白をトリミング
+    "files.trimFinalNewlines": true, // ファイルの保存時に最終行以降をトリミング
+    "workbench.startupEditor": "none", // Welcome Page を表示しない
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorCustomizations": {
+        "editor.lineHighlightBackground": "#333" // 選択している行の強調色
+    }
+}
