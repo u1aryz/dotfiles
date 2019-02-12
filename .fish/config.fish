@@ -3,6 +3,20 @@
 set -U FZF_LEGACY_KEYBINDINGS 0
 set -g theme_date_format "+%H:%M:%S"
 
+function j -d "Change directory by z & fzf"
+  set -l fzf_command
+  if set -q $argv
+    set fzf_command fzf --height 40% --nth 2.. --reverse --inline-info +s
+  else
+    set fzf_command fzf --height 40% --nth 2.. --reverse --inline-info +s --query "$argv"
+  end
+
+  __z -l 2>&1 | $fzf_command | sed 's/^[0-9,.]* *//' | read -l select
+  if not test -z "$select"
+    cd $select
+  end
+end
+
 # env
 set -x ANDROID_HOME ~/Library/Android/sdk
 set -x EDITOR 'code --new-window'
