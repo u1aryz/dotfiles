@@ -128,6 +128,11 @@ module.exports = {
     // URL to custom bell
     // bellSoundURL: 'http://example.com/bell.mp3',
 
+    // Change the behaviour of modifier keys to act as meta key
+    modifierKeys: {
+      altIsMeta: true,
+    },
+
     // for advanced config flags please refer to https://hyper.is/#cfg
   },
 
