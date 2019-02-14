@@ -13,6 +13,7 @@ end
 
 # keybind
 bind \cj '__fzf_z'
+bind \cg '__ghq_crtl_g'
 
 # env
 set -x ANDROID_HOME ~/Library/Android/sdk
