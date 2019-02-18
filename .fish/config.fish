@@ -32,6 +32,7 @@ bind \cg '__ghq_crtl_g'
 
 # env
 set -x ANDROID_HOME ~/Library/Android/sdk
+set -x PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $PATH
 set -x EDITOR 'code --new-window'
 set -x FZF_DEFAULT_OPTS '--height 40% --reverse --inline-info'
 
