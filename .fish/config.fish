@@ -67,7 +67,7 @@ function __fzf_delete_branch -d "Delete git branch by fzf"
 end
 
 # keybind
-bind \cj '__fzf_z'
+bind \ch '__fzf_z'
 bind \cg '__ghq_crtl_g'
 
 # env
