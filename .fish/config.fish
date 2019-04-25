@@ -68,7 +68,7 @@ end
 
 # keybind
 bind \ch '__fzf_z'
-bind \cg '__ghq_crtl_g'
+bind \cg '__ghq_repository_search'
 
 # env
 set -x ANDROID_HOME ~/Library/Android/sdk
