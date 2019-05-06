@@ -4,6 +4,14 @@
 
 module.exports = {
   config: {
+    // start tmux on first time
+    init: [
+      {
+        rule: 'once',
+        commands: ['tmux']
+      }
+    ],
+
     // choose either `'stable'` for receiving highly polished,
     // or `'canary'` for less polished but more frequent updates
     updateChannel: 'stable',
@@ -142,7 +150,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hyper-one-dark", "hyperpower", "hyper-opacity"],
+  plugins: ["hyper-one-dark", "hyperpower", "hyper-opacity", "hyper-init"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
