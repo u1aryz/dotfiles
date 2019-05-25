@@ -16,3 +16,5 @@
 	ff = false
 [pull]
 	ff = only
+[ghq]
+	root = ~/ghq
