@@ -18,3 +18,5 @@
 	ff = only
 [ghq]
 	root = ~/ghq
+[fetch]
+	prune = true
