@@ -33,6 +33,10 @@ set -U fish_pager_color_description B3A06D\x1eyellow
 set -U fish_pager_color_prefix white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 set -U fish_pager_color_progress brwhite\x1e\x2d\x2dbackground\x3dcyan
 
+function fish_greeting
+  fish_logo blue cyan green
+end
+
 function __fzf_z -d "Change directory by z & fzf"
   eval "z -l 2>&1 | fzf +s --query (commandline) | sed 's/^[0-9,.]* *//'" | read -l select
   if not test -z "$select"
