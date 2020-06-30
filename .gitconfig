@@ -17,7 +17,7 @@
 [pull]
 	ff = only
 [ghq]
-	root = ~/ghq
 	root = ~/go
+	root = ~/ghq
 [fetch]
 	prune = true
