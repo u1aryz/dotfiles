@@ -4,6 +4,7 @@ set -U FZF_LEGACY_KEYBINDINGS 0
 # ファイル検索にagを使用する
 set -U FZF_FIND_FILE_COMMAND "ag -l --hidden --ignore .git . \$dir 2> /dev/null"
 set -U FZF_OPEN_COMMAND $FZF_FIND_FILE_COMMAND
+set -g theme_date_timezone Asia/Tokyo
 set -g theme_date_format "+%H:%M:%S"
 
 # color scheme
