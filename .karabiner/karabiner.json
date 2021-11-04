@@ -78,6 +78,31 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Cmd+F1をCmd+@に変換（次のウィンドウを操作対象にする）",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command"
+                                        ]
+                                    },
+                                    "key_code": "f1"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "2",
+                                        "modifiers": [
+                                            "command",
+                                            "shift"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
