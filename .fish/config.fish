@@ -35,7 +35,7 @@ set -U fish_pager_color_prefix white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 set -U fish_pager_color_progress brwhite\x1e\x2d\x2dbackground\x3dcyan
 
 function fish_greeting
-  fish_logo blue cyan green
+  fish_logo blue cyan green '[' '@' | lolcat -p 3.0 -F 0.28 -S 1
 end
 
 function __fzf_z -d "Change directory by z & fzf"
