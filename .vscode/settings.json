@@ -18,4 +18,9 @@
     },
     "code-eol.color": "#555", // 改行コードの色
     "editor.copyWithSyntaxHighlighting": false, // シンタックスをコピーしない
+    "genieai.promptPrefix.addTests": "次のコードに対するテストを実装してください",
+    "genieai.promptPrefix.findProblems": "次のコードの問題点を見つけてください",
+    "genieai.promptPrefix.optimize": "次のコードを最適化してください",
+    "genieai.promptPrefix.explain": "次のコードを説明してください",
+    "genieai.promptPrefix.addComments": "次のコードにコメントを追加してください",
 }
