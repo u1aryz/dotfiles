@@ -7,6 +7,9 @@ set -U FZF_OPEN_COMMAND $FZF_FIND_FILE_COMMAND
 set -g theme_date_timezone Asia/Tokyo
 set -g theme_date_format "+%H:%M:%S"
 
+# デフォルトnode version
+set -U nvm_default_version v18.16.0
+
 # color scheme
 set -U fish_color_autosuggestion BD93F9
 set -U fish_color_cancel \x2dr
