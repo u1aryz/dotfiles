@@ -52,28 +52,58 @@ function __fzf_z -d "Change directory by z & fzf"
 end
 
 function __fzf_checkout -d "Checkout git branch by fzf"
+  set -l force_flag 0
+  set -l original_argv
+
+  for arg in $argv
+    if test "$arg" = "--force"
+      set force_flag 1
+    else
+      set original_argv $original_argv $arg
+    end
+  end
+
   set -l branches (git branch --all)
   set -l result $status
   if test $result -ne 0
     return $result
   end
 
-  eval "printf '%s\n' \$branches | grep -v HEAD | sed 's/.* //' | sed 's#remotes/[^/]*/##' | awk '!a[\$0]++' | fzf --query \"$argv\"" | read -l select
+  eval "printf '%s\n' \$branches | grep -v HEAD | sed 's/.* //' | sed 's#remotes/[^/]*/##' | awk '!a[\$0]++' | fzf --query \"$original_argv\"" | read -l select
   if not test -z "$select"
-    git checkout $select
+    if test $force_flag -eq 1
+      git checkout -f $select
+    else
+      git checkout $select
+    end
   end
 end
 
 function __fzf_delete_branch -d "Delete git branch by fzf"
+  set -l force_flag 0
+  set -l original_argv
+
+  for arg in $argv
+    if test "$arg" = "--force"
+      set force_flag 1
+    else
+      set original_argv $original_argv $arg
+    end
+  end
+
   set -l branches (git branch)
   set -l result $status
   if test $result -ne 0
     return $result
   end
 
-  eval "printf '%s\n' \$branches | sed 's/.* //' | fzf --query \"$argv\"" | read -l select
+  eval "printf '%s\n' \$branches | sed 's/.* //' | fzf --query \"$original_argv\"" | read -l select
   if not test -z "$select"
-    git branch -d $select
+    if test $force_flag -eq 1
+      git branch -D $select
+    else
+      git branch -d $select
+    end
   end
 end
 
@@ -102,7 +132,9 @@ alias tmux 'tmux -u'
 alias l 'ls -la'
 alias mkdir 'mkdir -p'
 alias fco '__fzf_checkout'
+alias fcof '__fzf_checkout --force'
 alias fbd '__fzf_delete_branch'
+alias fbdf '__fzf_delete_branch --force'
 alias gghq 'GHQ_ROOT=~/go/src ghq'
 alias ls 'exa'
 alias grep 'rg'
