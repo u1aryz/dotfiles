@@ -4,7 +4,7 @@
 [color]
 	ui = auto
 [alias]
-	graph = log --graph --all --color --pretty='%x09%h %cn%x09%s %Cred%d%Creset'
+	graph = log --graph --all --color --pretty='%x09%C(yellow)%h%Creset %C(green)%cn%Creset %s %C(auto)%d%Creset'
 [core]
 	quotepath = false
 	editor = code --wait --new-window
