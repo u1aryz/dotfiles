@@ -2,7 +2,7 @@
 # fzfの古いキーバインドは使わない
 set -U FZF_LEGACY_KEYBINDINGS 0
 # ファイル検索にagを使用する
-set -U FZF_FIND_FILE_COMMAND "ag -l --hidden --ignore .git . \$dir 2> /dev/null"
+set -U FZF_FIND_FILE_COMMAND "rg --files --hidden --follow --glob '!.git/*' 2> /dev/null"
 set -U FZF_OPEN_COMMAND $FZF_FIND_FILE_COMMAND
 set -g theme_date_timezone Asia/Tokyo
 set -g theme_date_format "+%H:%M:%S"
@@ -105,3 +105,4 @@ alias fco '__fzf_checkout'
 alias fbd '__fzf_delete_branch'
 alias gghq 'GHQ_ROOT=~/go/src ghq'
 alias ls 'exa'
+alias grep 'rg'
