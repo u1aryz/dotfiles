@@ -21,3 +21,5 @@
 	root = ~/ghq
 [fetch]
 	prune = true
+[init]
+	defaultBranch = main
