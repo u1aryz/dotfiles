@@ -83,10 +83,13 @@ bind \cg '__ghq_repository_search'
 
 # env
 set -x ANDROID_HOME ~/Library/Android/sdk
-set -x PATH $ANDROID_HOME/tools $ANDROID_HOME/platform-tools ~/go/bin /opt/homebrew/bin $PATH
 set -x EDITOR 'code --new-window'
 set -x FZF_DEFAULT_OPTS '--height 40% --reverse --inline-info'
 set -x RUNEWIDTH_EASTASIAN 0
+fish_add_path $ANDROID_HOME/tools
+fish_add_path $ANDROID_HOME/platform-tools
+fish_add_path ~/go/bin
+fish_add_path /opt/homebrew/bin
 
 # alias
 alias gst 'git status'
