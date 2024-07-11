@@ -90,6 +90,7 @@ fish_add_path $ANDROID_HOME/tools
 fish_add_path $ANDROID_HOME/platform-tools
 fish_add_path ~/go/bin
 fish_add_path /opt/homebrew/bin
+fish_add_path ~/.local/share/mise/shims
 
 # alias
 alias gst 'git status'
