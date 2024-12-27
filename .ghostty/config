@@ -1,0 +1,11 @@
+font-family = "Meslo LG S for Powerline"
+font-size = 13
+
+window-padding-x = 10
+window-padding-y = 0,10
+cursor-opacity = 0.8
+background-opacity = 0.9
+initial-command = /opt/homebrew/bin/tmux
+
+theme = "zenwritten_dark"
+palette = 7=#ffffff
