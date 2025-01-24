@@ -1,5 +1,6 @@
 font-family = "Meslo LG S for Powerline"
 font-size = 13
+font-feature = -dlig
 
 window-padding-x = 10
 window-padding-y = 0,10
