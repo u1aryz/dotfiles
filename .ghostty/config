@@ -10,3 +10,8 @@ initial-command = /opt/homebrew/bin/tmux
 
 theme = "zenwritten_dark"
 palette = 7=#ffffff
+
+# Keybindings for Zellij
+macos-option-as-alt = left
+keybind = alt+left=unbind
+keybind = alt+right=unbind
