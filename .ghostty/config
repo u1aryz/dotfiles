@@ -6,7 +6,7 @@ window-padding-x = 10
 window-padding-y = 0,10
 cursor-opacity = 0.8
 background-opacity = 0.9
-initial-command = /opt/homebrew/bin/tmux
+initial-command = /opt/homebrew/bin/zellij
 
 theme = "zenwritten_dark"
 palette = 7=#ffffff
