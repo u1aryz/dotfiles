@@ -128,3 +128,4 @@ alias cat 'bat -pP'
 alias less bat
 alias find fd
 alias mr 'mise run'
+alias ml 'mise list'
