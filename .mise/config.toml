@@ -1,2 +1,5 @@
 [tools]
 "npm:aicommit2" = "latest"
+
+[settings]
+experimental = true
