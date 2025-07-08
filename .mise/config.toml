@@ -8,3 +8,4 @@ trusted_config_paths = [
   "~/go/src/github.com/u1aryz",
   "~/.config/dotfiles",
 ]
+idiomatic_version_file_enable_tools = ["node"]
