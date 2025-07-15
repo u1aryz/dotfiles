@@ -129,3 +129,4 @@ alias less bat
 alias find fd
 alias mr 'mise run'
 alias ml 'mise list'
+alias mi 'mise install'
