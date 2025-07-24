@@ -74,6 +74,27 @@ function __fzf_delete_branch -d "Delete git branch by fzf"
     end
 end
 
+function tag_from_version -d "Create git tag from package.json version with v prefix"
+    set -l pkg_version (node -p "require('./package.json').version || ''" 2>/dev/null)
+    if test -z "$pkg_version"
+        echo "Failed to retrieve version from package.json" >&2
+        return 1
+    end
+
+    set -l tag
+    if string match -rq '^v' -- $pkg_version
+        set tag $pkg_version
+    else
+        set tag v$pkg_version
+    end
+
+    if git rev-parse --quiet --verify "$tag" >/dev/null
+        echo "Tag $tag already exists" >&2
+        return 1
+    end
+    git tag "$tag"
+end
+
 function sleep_display -d "Sleep the display after X seconds (default: 2) while keeping the system awake"
     # Default delay is 2 seconds
     set -l delay 2
