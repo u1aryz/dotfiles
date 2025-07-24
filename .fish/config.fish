@@ -74,7 +74,7 @@ function __fzf_delete_branch -d "Delete git branch by fzf"
     end
 end
 
-function sleep_display --description "Sleep the display after X seconds (default: 2) while keeping the system awake"
+function sleep_display -d "Sleep the display after X seconds (default: 2) while keeping the system awake"
     # Default delay is 2 seconds
     set -l delay 2
     if test (count $argv) -gt 0
