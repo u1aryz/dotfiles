@@ -74,10 +74,19 @@ function __fzf_delete_branch -d "Delete git branch by fzf"
     end
 end
 
-function tag_from_version -d "Create git tag from package.json version with v prefix"
-    set -l pkg_version (node -p "require('./package.json').version || ''" 2>/dev/null)
+function tag_from_version -d "Create git tag from package.json or deno.json version with v prefix"
+    set -l pkg_version ''
+
+    if test -f package.json
+        set pkg_version (node -p "require('./package.json').version || ''" 2>/dev/null)
+    end
+
+    if test -z "$pkg_version" -a -f deno.json
+        set pkg_version (node -p "require('./deno.json').version || ''" 2>/dev/null)
+    end
+
     if test -z "$pkg_version"
-        echo "Failed to retrieve version from package.json" >&2
+        echo "Failed to retrieve version from package.json or deno.json" >&2
         return 1
     end
 
