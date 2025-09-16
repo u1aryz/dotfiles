@@ -8,7 +8,7 @@ cursor-opacity = 0.8
 background-opacity = 0.9
 initial-command = /opt/homebrew/bin/zellij
 
-theme = "zenwritten_dark"
+theme = "Zenwritten Dark"
 palette = 7=#ffffff
 
 # Keybindings for Zellij
