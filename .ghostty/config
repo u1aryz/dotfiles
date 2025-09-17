@@ -1,6 +1,7 @@
-font-family = "Meslo LG S for Powerline"
+font-family = "MesloLGS Nerd Font Mono"
+font-family = "BIZ UDGothic"
 font-size = 13
-font-feature = -dlig
+adjust-icon-height = 10
 
 window-padding-x = 10
 window-padding-y = 0,10
