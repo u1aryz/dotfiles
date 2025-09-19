@@ -2,6 +2,7 @@
 node = "latest"
 "npm:aicommit2" = "latest"
 "npm:@openai/codex" = "latest"
+"npm:@aikidosec/safe-chain" = "latest"
 
 [settings]
 experimental = true
