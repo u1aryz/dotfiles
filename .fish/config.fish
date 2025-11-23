@@ -137,27 +137,29 @@ fish_add_path ~/go/bin
 fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/share/mise/shims
 
-# alias
-alias gst 'git status'
-alias ga 'git add'
-alias gc 'git commit'
-alias gb 'git branch'
-alias gco 'git checkout'
-alias gd 'git diff'
-alias gf 'git fetch'
-alias gdc 'git diff --cached'
-alias gg 'git graph'
-alias tmux 'tmux -u'
-alias l 'ls -la'
-alias mkdir 'mkdir -p'
+# abbreviations
+abbr -a gst git status
+abbr -a ga git add
+abbr -a gc git commit
+abbr -a gb git branch
+abbr -a gco git checkout
+abbr -a gd git diff
+abbr -a gf git fetch
+abbr -a gdc git diff --cached
+abbr -a gg git graph
+abbr -a tmux tmux -u
+abbr -a l ls -la
+abbr -a mkdir mkdir -p
+abbr -a gghq GHQ_ROOT=~/go/src ghq
+abbr -a ls eza
+abbr -a grep rg
+abbr -a cat bat -pP
+abbr -a less bat
+abbr -a find fd
+abbr -a mr mise run
+abbr -a ml mise list
+abbr -a mi mise install
+
+# function aliases (keep as alias since they call functions)
 alias fco __fzf_checkout
 alias fbd __fzf_delete_branch
-alias gghq 'GHQ_ROOT=~/go/src ghq'
-alias ls eza
-alias grep rg
-alias cat 'bat -pP'
-alias less bat
-alias find fd
-alias mr 'mise run'
-alias ml 'mise list'
-alias mi 'mise install'
