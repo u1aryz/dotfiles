@@ -1,6 +1,5 @@
 [tools]
 node = "latest"
-"npm:aicommit2" = "2.4.5"
 "npm:@openai/codex" = "latest"
 "npm:@aikidosec/safe-chain" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
