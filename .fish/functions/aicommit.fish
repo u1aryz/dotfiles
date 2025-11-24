@@ -93,10 +93,12 @@ Output only the numbered messages in the above format. No explanations needed."
 
     # Let user select a message with fzf
     set -l selected (fzf --prompt="コミットメッセージを選択: " --height=40% --reverse <$messages_file)
+    set -l messages (cat $messages_file)
     rm -f $messages_file
 
     if test -z "$selected"
-        echo "キャンセルされました。"
+        echo "キャンセルされました。生成されたコミットメッセージ:"
+        printf '%s\n' $messages
         return 0
     end
 
