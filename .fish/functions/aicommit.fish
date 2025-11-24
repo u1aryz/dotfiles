@@ -1,37 +1,34 @@
 function aicommit -d "Generate and select AI-powered commit messages"
-    # Parse arguments
-    set -l lang en
+    # Parse arguments using argparse
+    argparse -n aicommit h/help l 'lang=' -- $argv
+    or return
 
-    # Parse options
-    for arg in $argv
-        switch $arg
-            case '--lang=*'
-                set lang (string split -f2 "=" -- $arg)
-            case -l
-                set lang ja
-            case -h --help
-                echo "使い方: aicommit [オプション]"
-                echo ""
-                echo "AIを使用してConventional Commit形式のコミットメッセージを生成し、選択してコミットします。"
-                echo ""
-                echo "オプション:"
-                echo "  --lang=LANG    コミットメッセージの言語を指定 (en または ja、デフォルト: en)"
-                echo "  -l             日本語のコミットメッセージを生成 (--lang=ja の省略形)"
-                echo "  -h, --help     このヘルプメッセージを表示"
-                return 0
-        end
+    if set -q _flag_help
+        echo "使い方: aicommit [オプション]"
+        echo ""
+        echo "AIを使用してConventional Commit形式のコミットメッセージを生成し、選択してコミットします。"
+        echo ""
+        echo "オプション:"
+        echo "  --lang=LANG    コミットメッセージの言語を指定 (en または ja、デフォルト: en)"
+        echo "  -l             日本語のコミットメッセージを生成 (--lang=ja の省略形)"
+        echo "  -h, --help     このヘルプメッセージを表示"
+        return 0
     end
+
+    # Determine language
+    set -l lang en
+    set -q _flag_l; and set lang ja
+    set -q _flag_lang; and set lang $_flag_lang
 
     # Check if there are staged changes
     set -l diff_output (git diff --cached 2>&1)
-    set -l diff_status $status
-
-    if test $diff_status -ne 0
+    or begin
         echo "エラー: gitリポジトリではないか、gitコマンドが失敗しました"
         return 1
     end
 
-    if test -z "$diff_output"
+    test -n "$diff_output"
+    or begin
         echo "ステージされた変更がありません。"
         return 0
     end
@@ -40,12 +37,7 @@ function aicommit -d "Generate and select AI-powered commit messages"
     set -l git_status (git diff --cached --name-status)
 
     # Prepare prompt
-    set -l lang_instruction
-    if test "$lang" = ja
-        set lang_instruction "in Japanese"
-    else
-        set lang_instruction "in English"
-    end
+    set -l lang_instruction (test "$lang" = ja; and echo "in Japanese"; or echo "in English")
 
     set -l prompt "Analyze the following git diff and git status, then suggest 3 conventional commit messages $lang_instruction.
 
