@@ -39,37 +39,21 @@ function aicommit -d "Generate and select AI-powered commit messages"
     # Get git status for context (only staged files)
     set -l git_status (git diff --cached --name-status)
 
-    # Prepare prompt based on language
-    set -l prompt
+    # Prepare prompt
+    set -l lang_instruction
     if test "$lang" = ja
-        set prompt "以下のgit diffとgit statusを分析して、Conventional Commits形式のコミットメッセージを3つ提案してください。
-
-各メッセージは以下の形式に従ってください：
-- type: subject の形式（scopeは不要）
-- typeは feat, fix, docs, style, refactor, test, chore などから適切なものを選択
-- subjectは変更内容を簡潔に表現（日本語で）
-- subjectの最初の一文字は小文字または大文字のどちらでも可
-- 各メッセージは1行で完結させる
-
-git status:
-$git_status
-
-git diff:
-$diff_output
-
-出力形式：
-1. <コミットメッセージ1>
-2. <コミットメッセージ2>
-3. <コミットメッセージ3>
-
-上記の形式で、番号とメッセージのみを出力してください。説明は不要です。"
+        set lang_instruction "in Japanese"
     else
-        set prompt "Analyze the following git diff and git status, then suggest 3 conventional commit messages.
+        set lang_instruction "in English"
+    end
+
+    set -l prompt "Analyze the following git diff and git status, then suggest 3 conventional commit messages $lang_instruction.
 
 Each message should follow this format:
 - type: subject format (no scope needed)
 - type should be one of: feat, fix, docs, style, refactor, test, chore, etc.
-- subject should concisely describe the changes (in English)
+- subject should concisely describe the changes
+- subject can start with either lowercase or uppercase letter
 - Each message should be a single line
 
 git status:
@@ -84,7 +68,6 @@ Output format:
 3. <commit message 3>
 
 Output only the numbered messages in the above format. No explanations needed."
-    end
 
     # Call Claude to generate commit messages
     echo "コミットメッセージを生成中..."
