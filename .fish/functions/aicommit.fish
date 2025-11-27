@@ -28,7 +28,7 @@ function aicommit -d "Generate and select AI-powered commit messages"
     end
 
     # Select language with fzf
-    set -l lang (printf "en\nja\n" | fzf --prompt="言語を選択: " --height=40% --reverse)
+    set -l lang (printf "ja\nen\n" | fzf --prompt="言語を選択: " --height=40% --reverse)
     if test -z "$lang"
         echo "キャンセルされました。"
         return 0
