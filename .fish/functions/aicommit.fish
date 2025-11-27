@@ -82,13 +82,13 @@ Output only the numbered messages in the above format. No explanations needed."
 
     switch $provider
         case claude
-            set ai_output (timeout 60 claude -p <$prompt_file 2>&1)
+            set ai_output (timeout 60 claude --model sonnet -p <$prompt_file 2>&1)
             set ai_status $status
         case gemini
-            set ai_output (timeout 60 sh -c "cat '$prompt_file' | gemini 2>/dev/null")
+            set ai_output (timeout 60 sh -c "cat '$prompt_file' | gemini --model flash-lite 2>/dev/null")
             set ai_status $status
         case codex
-            set ai_output (timeout 60 sh -c "cat '$prompt_file' | codex exec - 2>/dev/null")
+            set ai_output (timeout 60 sh -c "cat '$prompt_file' | codex --model codex-mini-latest exec - 2>/dev/null")
             set ai_status $status
     end
 
