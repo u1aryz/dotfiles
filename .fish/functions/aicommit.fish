@@ -1,24 +1,18 @@
 function aicommit -d "Generate and select AI-powered commit messages"
     # Parse arguments using argparse
-    argparse -n aicommit h/help l 'lang=' -- $argv
+    argparse -n aicommit h/help -- $argv
     or return
 
     if set -q _flag_help
         echo "使い方: aicommit [オプション]"
         echo ""
         echo "AIを使用してConventional Commit形式のコミットメッセージを生成し、選択してコミットします。"
+        echo "言語とAIプロバイダーはfzfで対話的に選択します。"
         echo ""
         echo "オプション:"
-        echo "  --lang=LANG    コミットメッセージの言語を指定 (en または ja、デフォルト: en)"
-        echo "  -l             日本語のコミットメッセージを生成 (--lang=ja の省略形)"
         echo "  -h, --help     このヘルプメッセージを表示"
         return 0
     end
-
-    # Determine language
-    set -l lang en
-    set -q _flag_l; and set lang ja
-    set -q _flag_lang; and set lang $_flag_lang
 
     # Check if there are staged changes
     set -l diff_output (git diff --cached 2>&1)
@@ -30,6 +24,20 @@ function aicommit -d "Generate and select AI-powered commit messages"
     test -n "$diff_output"
     or begin
         echo "ステージされた変更がありません。"
+        return 0
+    end
+
+    # Select language with fzf
+    set -l lang (printf "en\nja\n" | fzf --prompt="言語を選択: " --height=40% --reverse)
+    if test -z "$lang"
+        echo "キャンセルされました。"
+        return 0
+    end
+
+    # Select AI provider with fzf
+    set -l provider (printf "claude\ncodex\ngemini\n" | fzf --prompt="AIプロバイダーを選択: " --height=40% --reverse)
+    if test -z "$provider"
+        echo "キャンセルされました。"
         return 0
     end
 
@@ -61,32 +69,53 @@ Output format:
 
 Output only the numbered messages in the above format. No explanations needed."
 
-    # Call Claude to generate commit messages
-    echo "コミットメッセージを生成中..."
+    # Call AI provider to generate commit messages
+    echo "コミットメッセージを生成中 ($provider)..."
 
     # Use a temporary file to pass the prompt to avoid quoting issues
     set -l prompt_file (mktemp)
     echo "$prompt" >$prompt_file
-    set -l claude_output (claude -p <$prompt_file 2>&1)
-    set -l claude_status $status
+
+    # Execute command based on provider with timeout
+    set -l ai_output
+    set -l ai_status
+
+    switch $provider
+        case claude
+            set ai_output (timeout 60 claude -p <$prompt_file 2>&1)
+            set ai_status $status
+        case gemini
+            set ai_output (timeout 60 sh -c "cat '$prompt_file' | gemini 2>/dev/null")
+            set ai_status $status
+        case codex
+            set ai_output (timeout 60 sh -c "cat '$prompt_file' | codex exec - 2>/dev/null")
+            set ai_status $status
+    end
+
     rm -f $prompt_file
 
-    if test $claude_status -ne 0
-        echo "エラー: Claude CLIの呼び出しに失敗しました"
-        echo "$claude_output"
+    # Check for timeout (exit code 124)
+    if test $ai_status -eq 124
+        echo "エラー: AI CLI ($provider) の呼び出しがタイムアウトしました (60秒)"
+        return 1
+    end
+
+    if test $ai_status -ne 0
+        echo "エラー: AI CLI ($provider) の呼び出しに失敗しました (exit code: $ai_status)"
+        echo "$ai_output"
         return 1
     end
 
     # Parse the output to extract commit messages
     set -l messages_file (mktemp)
-    echo "$claude_output" | perl -pe 's/ (\d+)\. /\n$1. /g' | grep '^\d\.' | sed -E 's/^[0-9]+\. //' >$messages_file
+    echo "$ai_output" | perl -pe 's/ (\d+)\. /\n$1. /g' | grep '^\d\.' | sed -E 's/^[0-9]+\. //' >$messages_file
 
     # Check if we found any messages
     set -l message_count (wc -l <$messages_file | string trim)
     if test "$message_count" -eq 0
-        echo "エラー: Claudeの出力からコミットメッセージをパースできませんでした"
-        echo "Claudeの出力:"
-        echo "$claude_output"
+        echo "エラー: AIの出力からコミットメッセージをパースできませんでした"
+        echo "AIの出力:"
+        echo "$ai_output"
         rm -f $messages_file
         return 1
     end
