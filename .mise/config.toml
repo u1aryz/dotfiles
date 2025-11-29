@@ -1,8 +1,6 @@
 [tools]
 node = "latest"
-"npm:@openai/codex" = "latest"
 "npm:@aikidosec/safe-chain" = "latest"
-"npm:@google/gemini-cli" = "latest"
 
 [settings]
 experimental = true
