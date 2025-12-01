@@ -108,23 +108,19 @@ Output only the numbered messages in the above format. No explanations needed."
     end
 
     # Parse the output to extract commit messages
-    set -l messages_file (mktemp)
-    echo "$ai_output" | perl -pe 's/ (\d+)\. /\n$1. /g' | grep '^\d\.' | sed -E 's/^[0-9]+\. //' >$messages_file
+    set -l messages (echo "$ai_output" | perl -pe 's/ (\d+)\. /\n$1. /g' | grep '^\d\.' | sed -E 's/^[0-9]+\. //')
 
     # Check if we found any messages
-    set -l message_count (wc -l <$messages_file | string trim)
+    set -l message_count (count $messages)
     if test "$message_count" -eq 0
         echo "エラー: AIの出力からコミットメッセージをパースできませんでした"
         echo "AIの出力:"
         echo "$ai_output"
-        rm -f $messages_file
         return 1
     end
 
     # Let user select a message with fzf
-    set -l selected (fzf --prompt="コミットメッセージを選択: " --height=40% --reverse <$messages_file)
-    set -l messages (cat $messages_file)
-    rm -f $messages_file
+    set -l selected (printf '%s\n' $messages | fzf --prompt="コミットメッセージを選択: " --height=40% --reverse)
 
     if test -z "$selected"
         echo "キャンセルされました。生成されたコミットメッセージ:"
