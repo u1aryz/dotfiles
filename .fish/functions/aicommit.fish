@@ -83,13 +83,13 @@ Output only the numbered messages in the above format. No explanations needed."
 
     switch $provider
         case claude
-            set ai_output (timeout $timeout_seconds claude --model sonnet -p <$prompt_file 2>&1)
+            set ai_output (timeout --foreground $timeout_seconds claude --model sonnet -p <$prompt_file 2>&1)
             set ai_status $status
         case gemini
-            set ai_output (timeout $timeout_seconds gemini --model flash-lite <$prompt_file 2>&1)
+            set ai_output (timeout --foreground $timeout_seconds gemini --model flash-lite <$prompt_file 2>&1)
             set ai_status $status
         case codex
-            set ai_output (timeout $timeout_seconds codex --model codex-mini-latest exec - <$prompt_file 2>&1)
+            set ai_output (timeout --foreground $timeout_seconds codex --model codex-mini-latest exec - <$prompt_file 2>&1)
             set ai_status $status
     end
 
