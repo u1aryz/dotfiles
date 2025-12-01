@@ -77,18 +77,19 @@ Output only the numbered messages in the above format. No explanations needed."
     echo "$prompt" >$prompt_file
 
     # Execute command based on provider with timeout
+    set -l timeout_seconds 60
     set -l ai_output
     set -l ai_status
 
     switch $provider
         case claude
-            set ai_output (timeout 60 claude --model sonnet -p <$prompt_file 2>&1)
+            set ai_output (timeout $timeout_seconds claude --model sonnet -p <$prompt_file 2>&1)
             set ai_status $status
         case gemini
-            set ai_output (timeout 60 sh -c "cat '$prompt_file' | gemini --model flash-lite 2>&1")
+            set ai_output (timeout $timeout_seconds sh -c "cat '$prompt_file' | gemini --model flash-lite 2>&1")
             set ai_status $status
         case codex
-            set ai_output (timeout 60 sh -c "cat '$prompt_file' | codex --model codex-mini-latest exec - 2>&1")
+            set ai_output (timeout $timeout_seconds sh -c "cat '$prompt_file' | codex --model codex-mini-latest exec - 2>&1")
             set ai_status $status
     end
 
@@ -96,7 +97,7 @@ Output only the numbered messages in the above format. No explanations needed."
 
     # Check for timeout (exit code 124)
     if test $ai_status -eq 124
-        echo "エラー: AI CLI ($provider) の呼び出しがタイムアウトしました (60秒)"
+        echo "エラー: AI CLI ($provider) の呼び出しがタイムアウトしました ("$timeout_seconds"秒)"
         return 1
     end
 
