@@ -7,7 +7,7 @@ function aicommit -d "Generate and select AI-powered commit messages"
         echo "使い方: aicommit [オプション]"
         echo ""
         echo "AIを使用してConventional Commit形式のコミットメッセージを生成し、選択してコミットします。"
-        echo "言語とAIプロバイダーはfzfで対話的に選択します。"
+        echo "言語とコードエージェントはfzfで対話的に選択します。"
         echo ""
         echo "オプション:"
         echo "  -h, --help     このヘルプメッセージを表示"
@@ -34,9 +34,9 @@ function aicommit -d "Generate and select AI-powered commit messages"
         return 0
     end
 
-    # Select AI provider with fzf
-    set -l provider (printf "claude\ncodex\ngemini\n" | fzf --prompt="AIプロバイダーを選択: " --height=40% --reverse)
-    if test -z "$provider"
+    # Select code agent with fzf
+    set -l code_agent (printf "claude\ncodex\ngemini\n" | fzf --prompt="コードエージェントを選択: " --height=40% --reverse)
+    if test -z "$code_agent"
         echo "キャンセルされました。"
         return 0
     end
@@ -69,19 +69,19 @@ Output format:
 
 Output only the numbered messages in the above format. No explanations needed."
 
-    # Call AI provider to generate commit messages
-    echo "コミットメッセージを生成中 ($provider)..."
+    # Call code agent to generate commit messages
+    echo "コミットメッセージを生成中 ($code_agent)..."
 
     # Use a temporary file to pass the prompt to avoid quoting issues
     set -l prompt_file (mktemp)
     echo "$prompt" >$prompt_file
 
-    # Execute command based on provider with timeout
+    # Execute command based on code agent with timeout
     set -l timeout_seconds 60
     set -l ai_output
     set -l ai_status
 
-    switch $provider
+    switch $code_agent
         case claude
             set ai_output (timeout --foreground $timeout_seconds claude --model sonnet -p <$prompt_file 2>&1)
             set ai_status $status
@@ -97,12 +97,12 @@ Output only the numbered messages in the above format. No explanations needed."
 
     # Check for timeout (exit code 124)
     if test $ai_status -eq 124
-        echo "エラー: AI CLI ($provider) の呼び出しがタイムアウトしました ("$timeout_seconds"秒)"
+        echo "エラー: AI CLI ($code_agent) の呼び出しがタイムアウトしました ("$timeout_seconds"秒)"
         return 1
     end
 
     if test $ai_status -ne 0
-        echo "エラー: AI CLI ($provider) の呼び出しに失敗しました (exit code: $ai_status)"
+        echo "エラー: AI CLI ($code_agent) の呼び出しに失敗しました (exit code: $ai_status)"
         echo "$ai_output"
         return 1
     end
