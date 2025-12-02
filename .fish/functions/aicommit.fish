@@ -78,44 +78,53 @@ Output only the numbered messages in the above format. No explanations needed."
 
     # Execute command based on code agent with timeout
     set -l timeout_seconds 60
-    set -l ai_output
+    set -l ai_stdout
+    set -l ai_stderr
     set -l ai_status
+
+    # Create temporary files for stdout and stderr
+    set -l stdout_file (mktemp)
+    set -l stderr_file (mktemp)
 
     switch $code_agent
         case claude
-            set ai_output (timeout --foreground $timeout_seconds claude --model sonnet -p <$prompt_file 2>&1)
+            timeout --foreground $timeout_seconds claude --model sonnet -p <$prompt_file >$stdout_file 2>$stderr_file
             set ai_status $status
         case gemini
-            set ai_output (timeout --foreground $timeout_seconds gemini --model flash-lite <$prompt_file 2>&1)
+            timeout --foreground $timeout_seconds gemini --model flash-lite <$prompt_file >$stdout_file 2>$stderr_file
             set ai_status $status
         case codex
-            set ai_output (timeout --foreground $timeout_seconds codex --model codex-mini-latest exec - <$prompt_file 2>&1)
+            timeout --foreground $timeout_seconds codex --model codex-mini-latest exec - <$prompt_file >$stdout_file 2>$stderr_file
             set ai_status $status
     end
 
-    rm -f $prompt_file
+    set ai_stdout (cat $stdout_file)
+    set ai_stderr (cat $stderr_file)
+
+    rm -f $prompt_file $stdout_file $stderr_file
 
     # Check for timeout (exit code 124)
     if test $ai_status -eq 124
         echo "エラー: AI CLI ($code_agent) の呼び出しがタイムアウトしました ("$timeout_seconds"秒)"
+        test -n "$ai_stderr"; and echo "$ai_stderr"
         return 1
     end
 
     if test $ai_status -ne 0
         echo "エラー: AI CLI ($code_agent) の呼び出しに失敗しました (exit code: $ai_status)"
-        echo "$ai_output"
+        test -n "$ai_stderr"; and echo "$ai_stderr"
         return 1
     end
 
     # Parse the output to extract commit messages
-    set -l messages (echo "$ai_output" | sed -E 's/ ([0-9]+)\. /\n\1. /g' | grep '^\d\.' | sed -E 's/^[0-9]+\. //')
+    set -l messages (echo "$ai_stdout" | sed -E 's/ ([0-9]+)\. /\n\1. /g' | grep '^\d\.' | sed -E 's/^[0-9]+\. //')
 
     # Check if we found any messages
     set -l message_count (count $messages)
     if test "$message_count" -eq 0
         echo "エラー: AIの出力からコミットメッセージをパースできませんでした"
         echo "AIの出力:"
-        echo "$ai_output"
+        echo "$ai_stdout"
         return 1
     end
 
