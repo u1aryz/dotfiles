@@ -70,7 +70,7 @@ Output format:
 Output only the numbered messages in the above format. No explanations needed."
 
     # Call code agent to generate commit messages
-    echo "コミットメッセージを生成中 ($code_agent)..."
+    echo "コミットメッセージを生成中 ($code_agent, $lang)..."
 
     # Use a temporary file to pass the prompt to avoid quoting issues
     set -l prompt_file (mktemp)
