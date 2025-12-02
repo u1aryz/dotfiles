@@ -108,7 +108,7 @@ Output only the numbered messages in the above format. No explanations needed."
     end
 
     # Parse the output to extract commit messages
-    set -l messages (echo "$ai_output" | perl -pe 's/ (\d+)\. /\n$1. /g' | grep '^\d\.' | sed -E 's/^[0-9]+\. //')
+    set -l messages (echo "$ai_output" | sed -E 's/ ([0-9]+)\. /\n\1. /g' | grep '^\d\.' | sed -E 's/^[0-9]+\. //')
 
     # Check if we found any messages
     set -l message_count (count $messages)
