@@ -1,4 +1,12 @@
 function aicommit -d "Generate and select AI-powered commit messages"
+    # Constants
+    set -l TIMEOUT_SECONDS 60
+
+    # Helper function for fzf selection
+    function __fzf_select --argument-names prompt
+        printf '%s\n' $argv[2..] | fzf --prompt="$prompt" --height=40% --reverse
+    end
+
     # Parse arguments using argparse
     argparse -n aicommit h/help -- $argv
     or return
@@ -28,14 +36,14 @@ function aicommit -d "Generate and select AI-powered commit messages"
     end
 
     # Select language with fzf
-    set -l lang (printf "ja\nen\n" | fzf --prompt="言語を選択: " --height=40% --reverse)
+    set -l lang (__fzf_select "言語を選択: " ja en)
     if test -z "$lang"
         echo "キャンセルされました。"
         return 0
     end
 
     # Select code agent with fzf
-    set -l code_agent (printf "claude\ncodex\ngemini\n" | fzf --prompt="コードエージェントを選択: " --height=40% --reverse)
+    set -l code_agent (__fzf_select "コードエージェントを選択: " claude codex gemini)
     if test -z "$code_agent"
         echo "キャンセルされました。"
         return 0
@@ -72,46 +80,40 @@ Output only the numbered messages in the above format. No explanations needed."
     # Call code agent to generate commit messages
     echo "コミットメッセージを生成中 ($code_agent, $lang)..."
 
-    # Use a temporary file to pass the prompt to avoid quoting issues
+    # Create temporary files
     set -l prompt_file (mktemp)
-    echo "$prompt" >$prompt_file
-
-    # Execute command based on code agent with timeout
-    set -l timeout_seconds 60
-    set -l ai_stdout
-    set -l ai_stderr
-    set -l ai_status
-
-    # Create temporary files for stdout and stderr
     set -l stdout_file (mktemp)
     set -l stderr_file (mktemp)
 
+    echo "$prompt" >$prompt_file
+
+    # Build command based on code agent
+    set -l ai_cmd
     switch $code_agent
         case claude
-            timeout --foreground $timeout_seconds claude --model sonnet -p <$prompt_file >$stdout_file 2>$stderr_file
-            set ai_status $status
+            set ai_cmd claude --model sonnet -p
         case gemini
-            timeout --foreground $timeout_seconds gemini --model flash-lite <$prompt_file >$stdout_file 2>$stderr_file
-            set ai_status $status
+            set ai_cmd gemini --model flash-lite
         case codex
-            timeout --foreground $timeout_seconds codex --model codex-mini-latest exec - <$prompt_file >$stdout_file 2>$stderr_file
-            set ai_status $status
+            set ai_cmd codex --model codex-mini-latest exec -
     end
 
-    set ai_stdout (cat $stdout_file)
-    set ai_stderr (cat $stderr_file)
+    # Execute command with timeout
+    timeout --foreground $TIMEOUT_SECONDS $ai_cmd <$prompt_file >$stdout_file 2>$stderr_file
+    set -l ai_status $status
+
+    set -l ai_stdout (cat $stdout_file)
+    set -l ai_stderr (cat $stderr_file)
 
     rm -f $prompt_file $stdout_file $stderr_file
 
-    # Check for timeout (exit code 124)
-    if test $ai_status -eq 124
-        echo "エラー: AI CLI ($code_agent) の呼び出しがタイムアウトしました ("$timeout_seconds"秒)"
-        test -n "$ai_stderr"; and echo "$ai_stderr"
-        return 1
-    end
-
+    # Handle errors
     if test $ai_status -ne 0
-        echo "エラー: AI CLI ($code_agent) の呼び出しに失敗しました (exit code: $ai_status)"
+        if test $ai_status -eq 124
+            echo "エラー: AI CLI ($code_agent) の呼び出しがタイムアウトしました ($TIMEOUT_SECONDS 秒)"
+        else
+            echo "エラー: AI CLI ($code_agent) の呼び出しに失敗しました (exit code: $ai_status)"
+        end
         test -n "$ai_stderr"; and echo "$ai_stderr"
         return 1
     end
@@ -129,7 +131,7 @@ Output only the numbered messages in the above format. No explanations needed."
     end
 
     # Let user select a message with fzf
-    set -l selected (printf '%s\n' $messages | fzf --prompt="コミットメッセージを選択: " --height=40% --reverse)
+    set -l selected (__fzf_select "コミットメッセージを選択: " $messages)
 
     if test -z "$selected"
         echo "キャンセルされました。生成されたコミットメッセージ:"
