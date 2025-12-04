@@ -22,8 +22,8 @@ function aicommit -d "Generate and select AI-powered commit messages"
         return 0
     end
 
-    # Check if there are staged changes
-    set -l diff_output (git diff --cached 2>&1)
+    # Check if there are staged changes (exclude lock files from diff)
+    set -l diff_output (git diff --cached -- . ':!*.lock' ':!package-lock.json' ':!pnpm-lock.yaml' 2>&1)
     or begin
         echo "エラー: gitリポジトリではないか、gitコマンドが失敗しました"
         return 1
