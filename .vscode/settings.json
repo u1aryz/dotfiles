@@ -2,9 +2,9 @@
   "editor.tabSize": 2,
   "editor.renderControlCharacters": true, // 制御文字を表示
   "editor.renderWhitespace": "all", // 半角スペースを常に表示
-  "editor.formatOnPaste": true, // ペースト時に自動でフォーマット
-  "editor.formatOnSave": true, // ファイル保存時に自動でフォーマット
-  "editor.formatOnType": true, // 入力した行を自動でフォーマット
+  "editor.formatOnPaste": false, // ペースト時に自動でフォーマット
+  "editor.formatOnSave": false, // ファイル保存時に自動でフォーマット
+  "editor.formatOnType": false, // 入力した行を自動でフォーマット
   "editor.scrollBeyondLastLine": false, // 最終行よりも下へのスクロールをさせない
   "editor.dragAndDrop": false, // ドラッグアンドドロップでコードの移動をしないようにする
   "files.insertFinalNewline": true, // ファイルの保存時に末尾を改行
