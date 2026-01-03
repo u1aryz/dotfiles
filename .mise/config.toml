@@ -1,6 +1,7 @@
 [tools]
 node = "latest"
 "npm:@aikidosec/safe-chain" = "latest"
+pnpm = "latest"
 
 [settings]
 experimental = true
