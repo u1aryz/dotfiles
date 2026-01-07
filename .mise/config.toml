@@ -1,4 +1,8 @@
+[env]
+GITHUB_TOKEN = "{{ exec(command='gh auth token 2>/dev/null || true') }}"
+
 [tools]
+"github:u1aryz/ffprompt" = "latest"
 node = "latest"
 "npm:@aikidosec/safe-chain" = "latest"
 pnpm = "latest"
