@@ -43,7 +43,7 @@ function aicommit -d "Generate and select AI-powered commit messages"
     end
 
     # Select code agent with fzf
-    set -l code_agent (__fzf_select "コードエージェントを選択: " claude codex gemini)
+    set -l code_agent (__fzf_select "コードエージェントを選択: " claude opencode codex gemini)
     if test -z "$code_agent"
         echo "キャンセルされました。"
         return 0
@@ -92,6 +92,8 @@ Output only the numbered messages in the above format. No explanations needed."
     switch $code_agent
         case claude
             set ai_cmd claude --model sonnet -p
+        case opencode
+            set ai_cmd opencode run --model opencode/glm-4.7-free
         case gemini
             set ai_cmd gemini --model flash-lite
         case codex
