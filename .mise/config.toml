@@ -5,7 +5,6 @@ GITHUB_API_TOKEN = "{{ exec(command='gh auth token 2>/dev/null || true') }}"
 node = "latest"
 pnpm = "latest"
 
-"cargo:keifu" = "latest"
 "github:u1aryz/ffprompt" = "latest"
 "go:github.com/mattn/speedc" = "latest"
 "npm:@aikidosec/safe-chain" = "latest"
