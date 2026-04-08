@@ -13,5 +13,6 @@
     "playwright-cli@playwright-cli": true,
     "gopls-lsp@claude-plugins-official": true,
     "cloudflare@cloudflare": true
-  }
+  },
+  "effortLevel": "high"
 }
