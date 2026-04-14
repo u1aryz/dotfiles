@@ -8,6 +8,7 @@ pnpm = "latest"
 "github:u1aryz/ffprompt" = "latest"
 "go:github.com/mattn/speedc" = "latest"
 "npm:@aikidosec/safe-chain" = "latest"
+"npm:cf" = "latest"
 
 [settings]
 experimental = true
