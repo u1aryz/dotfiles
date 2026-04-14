@@ -54,6 +54,12 @@ function aicommit -d "Generate and select AI-powered commit messages"
 
     # Prepare prompt
     set -l lang_instruction (test "$lang" = ja; and echo "in Japanese"; or echo "in English")
+    set -l subject_style_instruction
+    if test "$lang" = ja
+        set subject_style_instruction "- subject should be a concise noun phrase in Japanese\n- avoid verb endings such as: する, した, している\n- prefer subjects like: Codex呼び出しの最新化, 設定文言の整理"
+    else
+        set subject_style_instruction "- subject must use imperative mood, not progressive/gerund form\n- avoid subjects like: adding, updating, fixing, refactoring"
+    end
 
     set -l prompt "Analyze the following git diff and git status, then suggest 3 conventional commit messages $lang_instruction.
 
@@ -61,6 +67,7 @@ Each message should follow this format:
 - type: subject format (no scope needed)
 - type should be one of: feat, fix, docs, style, refactor, test, chore, etc.
 - subject should concisely describe the changes
+$subject_style_instruction
 - subject can start with either lowercase or uppercase letter
 - Each message should be a single line
 
@@ -97,7 +104,9 @@ Output only the numbered messages in the above format. No explanations needed."
         case gemini
             set ai_cmd gemini --model flash-lite
         case codex
-            set ai_cmd codex --model codex-mini-latest exec -
+            # Follow the Codex CLI's configured default model instead of pinning
+            # the deprecated `codex-mini-latest` alias here.
+            set ai_cmd codex exec -
     end
 
     # Execute command with timeout
