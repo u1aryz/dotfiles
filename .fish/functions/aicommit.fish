@@ -106,7 +106,7 @@ Output only the numbered messages in the above format. No explanations needed."
         case codex
             # Follow the Codex CLI's configured default model instead of pinning
             # the deprecated `codex-mini-latest` alias here.
-            set ai_cmd codex exec -
+            set ai_cmd codex -m gpt-5.4-mini exec -
     end
 
     # Execute command with timeout
