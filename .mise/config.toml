@@ -9,6 +9,7 @@ pnpm = "latest"
 "go:github.com/mattn/speedc" = "latest"
 "npm:@aikidosec/safe-chain" = "latest"
 "npm:cf" = "latest"
+"npm:@earendil-works/pi-coding-agent" = "latest"
 
 [settings]
 experimental = true

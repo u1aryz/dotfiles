@@ -15,7 +15,7 @@ function aicommit -d "Generate and select AI-powered commit messages"
         echo "使い方: aicommit [オプション]"
         echo ""
         echo "AIを使用してConventional Commit形式のコミットメッセージを生成し、選択してコミットします。"
-        echo "言語とコードエージェントはfzfで対話的に選択します。"
+        echo "言語とpiモデルはfzfで対話的に選択します。"
         echo ""
         echo "オプション:"
         echo "  -h, --help     このヘルプメッセージを表示"
@@ -42,9 +42,27 @@ function aicommit -d "Generate and select AI-powered commit messages"
         return 0
     end
 
-    # Select code agent with fzf
-    set -l code_agent (__fzf_select "コードエージェントを選択: " claude opencode codex gemini)
-    if test -z "$code_agent"
+    # Select pi model with fzf
+    set -l pi_model_list (pi --list-models 2>/dev/null)
+    set -l list_models_status $status
+    if test $list_models_status -ne 0
+        echo "エラー: piのモデル一覧取得に失敗しました (exit code: $list_models_status)"
+        return 1
+    end
+
+    if test (count $pi_model_list) -eq 0; or string match -q "No models available*" -- $pi_model_list[1]
+        echo "エラー: 利用可能なpiモデルがありません。pi /login またはprovider/API key設定を確認してください。"
+        return 1
+    end
+
+    set -l pi_models (printf '%s\n' $pi_model_list | awk 'NR == 1 && $1 == "provider" && $2 == "model" { next } NF >= 2 { print $2 }')
+    if test (count $pi_models) -eq 0
+        echo "エラー: piのモデル一覧からモデル名を抽出できませんでした。"
+        return 1
+    end
+
+    set -l pi_model (__fzf_select "piモデルを選択: " $pi_models)
+    if test -z "$pi_model"
         echo "キャンセルされました。"
         return 0
     end
@@ -84,8 +102,8 @@ Output format:
 
 Output only the numbered messages in the above format. No explanations needed."
 
-    # Call code agent to generate commit messages
-    echo "コミットメッセージを生成中 ($code_agent, $lang)..."
+    # Call pi to generate commit messages
+    echo "コミットメッセージを生成中 (pi: $pi_model, $lang)..."
 
     # Create temporary files
     set -l prompt_file (mktemp)
@@ -94,20 +112,7 @@ Output only the numbered messages in the above format. No explanations needed."
 
     echo "$prompt" >$prompt_file
 
-    # Build command based on code agent
-    set -l ai_cmd
-    switch $code_agent
-        case claude
-            set ai_cmd claude --model sonnet -p
-        case opencode
-            set ai_cmd opencode run --model opencode/glm-4.7-free
-        case gemini
-            set ai_cmd gemini --model flash-lite
-        case codex
-            # Follow the Codex CLI's configured default model instead of pinning
-            # the deprecated `codex-mini-latest` alias here.
-            set ai_cmd codex -m gpt-5.4-mini exec -
-    end
+    set -l ai_cmd pi --model $pi_model --no-session -p
 
     # Execute command with timeout
     timeout --foreground $TIMEOUT_SECONDS $ai_cmd <$prompt_file >$stdout_file 2>$stderr_file
@@ -121,9 +126,9 @@ Output only the numbered messages in the above format. No explanations needed."
     # Handle errors
     if test $ai_status -ne 0
         if test $ai_status -eq 124
-            echo "エラー: AI CLI ($code_agent) の呼び出しがタイムアウトしました ($TIMEOUT_SECONDS 秒)"
+            echo "エラー: pi ($pi_model) の呼び出しがタイムアウトしました ($TIMEOUT_SECONDS 秒)"
         else
-            echo "エラー: AI CLI ($code_agent) の呼び出しに失敗しました (exit code: $ai_status)"
+            echo "エラー: pi ($pi_model) の呼び出しに失敗しました (exit code: $ai_status)"
         end
         test -n "$ai_stderr"; and echo "$ai_stderr"
         return 1
