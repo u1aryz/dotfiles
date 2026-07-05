@@ -3,7 +3,7 @@ function aicommit -d "Generate and select AI-powered commit messages"
     set -l TIMEOUT_SECONDS 60
 
     # Helper function for fzf selection
-    function __fzf_select --argument-names prompt
+    function __aicommit_select --argument-names prompt
         printf '%s\n' $argv[2..] | fzf --prompt="$prompt" --height=40% --reverse
     end
 
@@ -36,7 +36,7 @@ function aicommit -d "Generate and select AI-powered commit messages"
     end
 
     # Select language with fzf
-    set -l lang (__fzf_select "言語を選択: " ja en)
+    set -l lang (__aicommit_select "言語を選択: " ja en)
     if test -z "$lang"
         echo "キャンセルされました。"
         return 0
@@ -61,7 +61,7 @@ function aicommit -d "Generate and select AI-powered commit messages"
         return 1
     end
 
-    set -l pi_model (__fzf_select "piモデルを選択: " $pi_models)
+    set -l pi_model (__aicommit_select "piモデルを選択: " $pi_models)
     if test -z "$pi_model"
         echo "キャンセルされました。"
         return 0
@@ -147,7 +147,7 @@ Output only the numbered messages in the above format. No explanations needed."
     end
 
     # Let user select a message with fzf
-    set -l selected (__fzf_select "コミットメッセージを選択: " $messages)
+    set -l selected (__aicommit_select "コミットメッセージを選択: " $messages)
 
     if test -z "$selected"
         echo "キャンセルされました。生成されたコミットメッセージ:"

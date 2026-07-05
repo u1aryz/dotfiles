@@ -7,15 +7,14 @@ set -gx RUNEWIDTH_EASTASIAN 0
 set -gx SSH_AUTH_SOCK ~/.bitwarden-ssh-agent.sock
 
 # Java
-fish_add_path $JAVA_HOME/bin
+fish_add_path -g $JAVA_HOME/bin
 
 # Android SDK
-fish_add_path $ANDROID_HOME/cmdline-tools/latest/bin
-fish_add_path $ANDROID_HOME/emulator
-fish_add_path $ANDROID_HOME/platform-tools
-fish_add_path $ANDROID_HOME/tools
+fish_add_path -g $ANDROID_HOME/cmdline-tools/latest/bin
+fish_add_path -g $ANDROID_HOME/emulator
+fish_add_path -g $ANDROID_HOME/platform-tools
 
 # User tools
-fish_add_path /opt/homebrew/bin
-fish_add_path ~/.local/share/mise/shims
-fish_add_path ~/go/bin
+fish_add_path -g /opt/homebrew/bin
+fish_add_path -g ~/.local/share/mise/shims
+fish_add_path -g ~/go/bin
