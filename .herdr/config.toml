@@ -15,6 +15,11 @@ focus_pane_right = "alt+l"
 # option + 左右キーで window (タブ) 移動 (デフォルトは prefix+p / prefix+n)
 previous_tab = "alt+left"
 next_tab = "alt+right"
+# option + 上下キーでワークスペース移動 (タブ移動の alt+left/right と対称)
+previous_workspace = "alt+up"
+next_workspace = "alt+down"
+# 新規ワークスペース作成 (デフォルトは prefix+shift+n で押しにくいため直接バインドに変更)
+new_workspace = "alt+n"
 
 [ui]
 agent_panel_sort = "priority"
