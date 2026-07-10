@@ -1,0 +1,26 @@
+onboarding = false
+
+[theme]
+# Ghostty のテーマ (Zenwritten Dark) にそのまま追従させる
+name = "terminal"
+
+[keys]
+# zellij tmux モードの d (Detach) に合わせる (デフォルトは prefix+q)
+detach = "prefix+d"
+# zellij の Alt+hjkl ペイン移動に合わせた直接バインド (デフォルトは prefix+h/j/k/l)
+focus_pane_left = "alt+h"
+focus_pane_down = "alt+j"
+focus_pane_up = "alt+k"
+focus_pane_right = "alt+l"
+# option + 左右キーで window (タブ) 移動 (デフォルトは prefix+p / prefix+n)
+previous_tab = "alt+left"
+next_tab = "alt+right"
+
+[ui]
+agent_panel_sort = "priority"
+# window (タブ) 追加時の名前入力プロンプトをスキップし、即座に作成する
+prompt_new_tab_name = false
+
+[advanced]
+# zellij の scroll_buffer_size 100000 (デフォルト10倍) に合わせて 10MB → 100MB
+scrollback_limit_bytes = 100_000_000
