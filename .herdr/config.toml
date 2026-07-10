@@ -12,14 +12,35 @@ focus_pane_left = "alt+h"
 focus_pane_down = "alt+j"
 focus_pane_up = "alt+k"
 focus_pane_right = "alt+l"
-# option + 左右キー、またはデフォルトの prefix+p / prefix+n で window (タブ) 移動
-previous_tab = ["alt+left", "prefix+p"]
-next_tab = ["alt+right", "prefix+n"]
-# option + 上下キーでワークスペース移動 (タブ移動の alt+left/right と対称)
-previous_workspace = "alt+up"
-next_workspace = "alt+down"
+# タブ移動はデフォルトの prefix+p / prefix+n (option+左右キーは下の nav.sh に割り当て)
 # 新規ワークスペース作成 (デフォルトは prefix+shift+n で押しにくいため直接バインドに変更)
 new_workspace = "alt+n"
+
+# option + 矢印キーはペイン優先のハイブリッド移動 (nav.sh 参照)
+# その方向にペインがあればペイン移動、なければ左右=タブ / 上下=ワークスペース移動
+[[keys.command]]
+key = "alt+left"
+type = "shell"
+command = "sh ~/.config/herdr/nav.sh left"
+description = "ペイン優先で左移動 (なければ前のタブ)"
+
+[[keys.command]]
+key = "alt+right"
+type = "shell"
+command = "sh ~/.config/herdr/nav.sh right"
+description = "ペイン優先で右移動 (なければ次のタブ)"
+
+[[keys.command]]
+key = "alt+up"
+type = "shell"
+command = "sh ~/.config/herdr/nav.sh up"
+description = "ペイン優先で上移動 (なければ前のワークスペース)"
+
+[[keys.command]]
+key = "alt+down"
+type = "shell"
+command = "sh ~/.config/herdr/nav.sh down"
+description = "ペイン優先で下移動 (なければ次のワークスペース)"
 
 [ui]
 agent_panel_sort = "priority"
