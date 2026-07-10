@@ -12,9 +12,9 @@ focus_pane_left = "alt+h"
 focus_pane_down = "alt+j"
 focus_pane_up = "alt+k"
 focus_pane_right = "alt+l"
-# option + 左右キーで window (タブ) 移動 (デフォルトは prefix+p / prefix+n)
-previous_tab = "alt+left"
-next_tab = "alt+right"
+# option + 左右キー、またはデフォルトの prefix+p / prefix+n で window (タブ) 移動
+previous_tab = ["alt+left", "prefix+p"]
+next_tab = ["alt+right", "prefix+n"]
 # option + 上下キーでワークスペース移動 (タブ移動の alt+left/right と対称)
 previous_workspace = "alt+up"
 next_workspace = "alt+down"
