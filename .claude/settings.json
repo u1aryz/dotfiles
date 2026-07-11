@@ -1,5 +1,4 @@
 {
-  "model": "claude-fable-5[1m]",
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
     "CLAUDE_CODE_SUBAGENT_MODEL": "claude-sonnet-5[1m]"
@@ -7,6 +6,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
+  "model": "claude-fable-5[1m]",
   "statusLine": {
     "type": "command",
     "command": "bunx -y ccstatusline@latest",
@@ -19,5 +19,6 @@
     "gopls-lsp@claude-plugins-official": true,
     "cloudflare@cloudflare": true
   },
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "theme": "auto"
 }
