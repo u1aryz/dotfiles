@@ -6,5 +6,5 @@ prettier = "latest"
 run = [
   "fish_indent -w .fish/config.fish .fish/conf.d/*.fish .fish/functions/*.fish",
   "taplo format .herdr/config.toml .mise/config.toml mise.toml",
-  "prettier --write .hyper.js .ccstatusline/settings.json .claude/settings.json .docker/config.json .karabiner/karabiner.json .vscode/settings.json",
+  "prettier --write .ccstatusline/settings.json .claude/settings.json .docker/config.json .karabiner/karabiner.json .vscode/settings.json",
 ]

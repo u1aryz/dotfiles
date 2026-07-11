@@ -17,7 +17,6 @@ link() {
 
 link .gitconfig "$HOME/.gitconfig"
 link .tmux.conf "$HOME/.tmux.conf"
-link .hyper.js "$HOME/.hyper.js"
 link .karabiner/karabiner.json "$HOME/.config/karabiner/karabiner.json"
 link .zellij/config.kdl "$HOME/.config/zellij/config.kdl"
 link .ghostty/config "$HOME/.config/ghostty/config"
