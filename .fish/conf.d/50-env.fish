@@ -18,3 +18,6 @@ fish_add_path -g $ANDROID_HOME/platform-tools
 fish_add_path -g /opt/homebrew/bin
 fish_add_path -g ~/.local/share/mise/shims
 fish_add_path -g ~/go/bin
+
+# OrbStack (docker CLI統合)
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :
