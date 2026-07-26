@@ -21,7 +21,7 @@ next_workspace = "cmd+backtick"
 previous_workspace = "cmd+shift+backtick"
 
 # option + 矢印キーはペイン優先のハイブリッド移動 (nav.sh 参照)
-# その方向にペインがあればペイン移動、なければ左右=タブ / 上下=ワークスペース移動
+# その方向にペインがあればペイン移動、なければ左右=タブ移動 (上下はペイン移動のみ)
 [[keys.command]]
 key = "alt+left"
 type = "shell"
@@ -38,13 +38,13 @@ description = "ペイン優先で右移動 (なければ次のタブ)"
 key = "alt+up"
 type = "shell"
 command = "sh ~/.config/herdr/nav.sh up"
-description = "ペイン優先で上移動 (なければ前のワークスペース)"
+description = "ペインの上移動"
 
 [[keys.command]]
 key = "alt+down"
 type = "shell"
 command = "sh ~/.config/herdr/nav.sh down"
-description = "ペイン優先で下移動 (なければ次のワークスペース)"
+description = "ペインの下移動"
 
 [ui]
 agent_panel_sort = "priority"

@@ -1,6 +1,6 @@
 #!/bin/sh
 # option+矢印キーのハイブリッド移動 (zellij の MoveFocusOrTab 相当)
-# その方向にペインがあればペイン移動、なければ左右=タブ / 上下=ワークスペース移動
+# その方向にペインがあればペイン移動、なければ左右=タブ移動 (上下はペイン移動のみ)
 # config.toml の [[keys.command]] から呼ばれる (HERDR_* 環境変数はherdrが渡す)
 set -eu
 
@@ -15,12 +15,5 @@ left | right)
 		jq -r --argjson o "$o" '.result.tabs | sort_by(.number) as $t |
 			($t | map(.focused) | index(true)) as $i | $t[($i + $o + length) % length].tab_id')
 	exec "$HERDR_BIN_PATH" tab focus "$id"
-	;;
-up | down)
-	[ "$dir" = up ] && o=-1 || o=1
-	id=$("$HERDR_BIN_PATH" workspace list |
-		jq -r --argjson o "$o" '.result.workspaces | sort_by(.number) as $w |
-			($w | map(.focused) | index(true)) as $i | $w[($i + $o + length) % length].workspace_id')
-	exec "$HERDR_BIN_PATH" workspace focus "$id"
 	;;
 esac
