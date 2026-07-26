@@ -17,3 +17,7 @@ palette = 7=#ffffff
 macos-option-as-alt = left
 keybind = alt+left=unbind
 keybind = alt+right=unbind
+# cmd+` / cmd+shift+` を kitty CSI-u シーケンスで herdr に送る (ワークスペース切り替え)
+# 96 = バッククォート、修飾フラグ 9 = cmd / 10 = cmd+shift
+keybind = cmd+backquote=text:\x1b[96;9u
+keybind = cmd+shift+backquote=text:\x1b[96;10u
