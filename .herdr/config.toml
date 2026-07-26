@@ -12,13 +12,16 @@ focus_pane_left = "alt+h"
 focus_pane_down = "alt+j"
 focus_pane_up = "alt+k"
 focus_pane_right = "alt+l"
-# タブ移動はデフォルトの prefix+p / prefix+n (option+左右キーは下の nav.sh に割り当て)
 # 新規ワークスペース作成 (デフォルトは prefix+shift+n で押しにくいため直接バインドに変更)
 new_workspace = "alt+n"
 # macOS のウィンドウ切り替え (cmd+` / cmd+shift+`) でワークスペースを循環
 # Ghostty が cmd キーを端末に送らないため、Ghostty 側で CSI-u シーケンスに変換して送信 (.ghostty/config 参照)
 next_workspace = "cmd+backtick"
 previous_workspace = "cmd+shift+backtick"
+# ctrl+tab / ctrl+shift+tab で Window (タブ) を循環
+# Ghostty がデフォルトで ctrl+tab を自身のタブ切り替えに使うため、Ghostty 側で CSI-u に変換して送信 (.ghostty/config 参照)
+next_tab = "ctrl+tab"
+previous_tab = "ctrl+shift+tab"
 
 # option + 矢印キーはペイン優先のハイブリッド移動 (nav.sh 参照)
 # その方向にペインがあればペイン移動、なければ左右=タブ移動 (上下はペイン移動のみ)

@@ -21,3 +21,7 @@ keybind = alt+right=unbind
 # 96 = バッククォート、修飾フラグ 9 = cmd / 10 = cmd+shift
 keybind = cmd+backquote=text:\x1b[96;9u
 keybind = cmd+shift+backquote=text:\x1b[96;10u
+# ctrl+tab / ctrl+shift+tab を kitty CSI-u シーケンスで herdr に送る (Window/タブ切り替え)
+# Ghostty デフォルトのタブ切り替えを上書き。9 = Tab、修飾フラグ 5 = ctrl / 6 = ctrl+shift
+keybind = ctrl+tab=text:\x1b[9;5u
+keybind = ctrl+shift+tab=text:\x1b[9;6u
