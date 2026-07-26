@@ -3,43 +3,101 @@
   "lines": [
     [
       {
-        "id": "86a20567-5f99-4106-a53d-b190ed44d669",
-        "type": "tokens-input",
-        "color": "blue"
+        "id": "8d7e568c-4309-45f9-aab7-a76e084c6cf9",
+        "type": "model",
+        "color": "brightBlue",
+        "rawValue": true
       },
       {
-        "id": "bfcc4fb2-e24f-42f3-b19a-f9096dab0d7f",
-        "type": "tokens-output",
-        "color": "brightRed"
-      },
-      {
-        "id": "4871b619-4f96-4faf-9aa6-bfeaf17c214c",
-        "type": "tokens-cached",
-        "color": "brightGreen"
-      },
-      {
-        "id": "48321576-36ae-4bd6-b3b3-a93621c1391b",
-        "type": "tokens-total"
-      },
-      {
-        "id": "7a434b86-3953-4146-ab22-8d3d107c4f10",
-        "type": "context-percentage",
-        "color": "brightMagenta"
+        "id": "1613a923-c998-4d6f-a557-688b4e581cfc",
+        "type": "thinking-effort",
+        "color": "magenta"
       }
     ],
     [
       {
-        "id": "c5443569-f99f-4e83-ae71-dd226bfb8e15",
-        "type": "model",
-        "color": "brightBlue"
+        "id": "891e4fcf-9cdb-443b-833d-69b4bee24bf8",
+        "type": "custom-text",
+        "color": "cyan",
+        "customText": "Context:"
       },
       {
-        "id": "5c4fb602-7225-4c44-8d4b-8b82d6b67e20",
-        "type": "current-working-dir",
-        "color": "brightBlack"
+        "id": "f686dd54-2e91-4f4b-bcec-7d8573d8f933",
+        "type": "context-bar",
+        "color": "cyan",
+        "rawValue": true,
+        "metadata": {
+          "display": "progress-short"
+        }
       }
     ],
-    []
+    [
+      {
+        "id": "b6b246e6-f922-4f75-b341-615fac77f57a",
+        "type": "custom-text",
+        "color": "brightGreen",
+        "customText": "Session:"
+      },
+      {
+        "id": "ee03b0d8-a48d-4bbd-84b4-91014acaa68d",
+        "type": "session-usage",
+        "color": "brightGreen",
+        "rawValue": true,
+        "metadata": {
+          "display": "progress-short"
+        }
+      },
+      {
+        "id": "a37d7925-99b2-4c12-b407-8b260ade1189",
+        "type": "custom-text",
+        "color": "brightBlack",
+        "customText": "Reset:"
+      },
+      {
+        "id": "223eba25-3761-4747-8fd3-794820ea2b84",
+        "type": "reset-timer",
+        "color": "brightBlack",
+        "rawValue": true,
+        "metadata": {
+          "compact": "true"
+        }
+      }
+    ],
+    [
+      {
+        "id": "5e8c9bd1-22a9-4f70-ae80-9f6536971fef",
+        "type": "custom-text",
+        "color": "brightMagenta",
+        "customText": "Weekly: "
+      },
+      {
+        "id": "491ca835-b6fb-4726-896f-9a9ad0864399",
+        "type": "weekly-usage",
+        "color": "brightMagenta",
+        "rawValue": true,
+        "metadata": {
+          "display": "progress-short"
+        }
+      },
+      {
+        "id": "8b2f7e08-df24-44d0-962b-76e6b3e5dda5",
+        "type": "custom-text",
+        "color": "brightBlack",
+        "customText": "Reset:"
+      },
+      {
+        "id": "2c1d914e-579b-443c-9cc7-08940be4e1b7",
+        "type": "weekly-reset-timer",
+        "color": "brightBlack",
+        "rawValue": true,
+        "metadata": {
+          "absolute": "true",
+          "weekday": "true",
+          "compact": "true",
+          "timezone": "local"
+        }
+      }
+    ]
   ],
   "flexMode": "full-minus-40",
   "compactThreshold": 60,
@@ -49,7 +107,7 @@
   "globalBold": true,
   "powerline": {
     "enabled": false,
-    "separators": [""],
+    "separators": [""],
     "separatorInvertBackground": [false],
     "startCaps": [],
     "endCaps": [],
