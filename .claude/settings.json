@@ -21,5 +21,6 @@
   },
   "effortLevel": "high",
   "theme": "auto",
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "useAutoModeDuringPlan": true
 }
