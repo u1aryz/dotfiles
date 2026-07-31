@@ -49,6 +49,19 @@ type = "shell"
 command = "sh ~/.config/herdr/nav.sh down"
 description = "ペインの下移動"
 
+# herdr-file-viewer プラグインの起動 (README 推奨のキー割り当て)
+[[keys.command]]
+key = "prefix+f"
+type = "plugin_action"
+command = "herdr-file-viewer.open-file-viewer"
+description = "ファイルビューアをスプリットで開く"
+
+[[keys.command]]
+key = "prefix+shift+f"
+type = "plugin_action"
+command = "herdr-file-viewer.open-file-viewer-tab"
+description = "ファイルビューアをタブで開く (既に開いていれば切り替え)"
+
 [ui]
 agent_panel_sort = "priority"
 # window (タブ) 追加時の名前入力プロンプトをスキップし、即座に作成する
