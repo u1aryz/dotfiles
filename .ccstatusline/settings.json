@@ -97,6 +97,23 @@
           "timezone": "local"
         }
       }
+    ],
+    [
+      {
+        "id": "ee2ad172-2dff-48ea-9014-6655fa8174df",
+        "type": "custom-text",
+        "color": "brightYellow",
+        "customText": "Fable:  "
+      },
+      {
+        "id": "66b705c8-5792-4980-b6af-f58dfc5d3e20",
+        "type": "fable-weekly-usage",
+        "color": "brightYellow",
+        "rawValue": true,
+        "metadata": {
+          "display": "progress-short"
+        }
+      }
     ]
   ],
   "flexMode": "full-minus-40",
