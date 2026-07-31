@@ -8,7 +8,9 @@ window-padding-y = 0,10
 cursor-opacity = 0.8
 background-opacity = 0.9
 background-blur = 8
-initial-command = /opt/homebrew/bin/herdr
+# fish経由で起動してPATH等の環境変数を引き継ぐ (直接起動だとherdrのPATHにhomebrewが入らず、
+# file-viewerのレンダラー (bat/glow/delta) が見つからない)
+initial-command = /opt/homebrew/bin/fish -l -c herdr
 
 theme = "Zenwritten Dark"
 palette = 7=#ffffff
