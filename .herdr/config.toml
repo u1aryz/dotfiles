@@ -54,6 +54,10 @@ agent_panel_sort = "priority"
 # window (タブ) 追加時の名前入力プロンプトをスキップし、即座に作成する
 prompt_new_tab_name = false
 
+[ui.sidebar.spaces]
+# ワークスペース一覧のエントリ間に空行1行を入れて行間を広げる (デフォルトは0)
+row_gap = 1
+
 [advanced]
 # zellij の scroll_buffer_size 100000 (デフォルト10倍) に合わせて 10MB → 100MB
 scrollback_limit_bytes = 100_000_000
