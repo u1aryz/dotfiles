@@ -23,6 +23,13 @@ previous_workspace = "cmd+shift+backtick"
 next_tab = "ctrl+tab"
 previous_tab = "ctrl+shift+tab"
 
+# 現在のタブを左にhunk、右側に上下2つのプロンプトの構成に変更
+[[keys.command]]
+key = "prefix+shift+h"
+type = "shell"
+command = "sh ~/.config/herdr/hunk-layout.sh"
+description = "現在のタブを3ペイン構成に変更"
+
 # option + 矢印キーはペイン優先のハイブリッド移動 (nav.sh 参照)
 # その方向にペインがあればペイン移動、なければ左右=タブ移動 (上下はペイン移動のみ)
 [[keys.command]]
