@@ -14,10 +14,10 @@ focus_pane_up = "alt+k"
 focus_pane_right = "alt+l"
 # 新規ワークスペース作成 (デフォルトは prefix+shift+n で押しにくいため直接バインドに変更)
 new_workspace = "alt+n"
-# macOS のウィンドウ切り替え (cmd+` / cmd+shift+`) でワークスペースを循環
+# macOS のウィンドウ切り替え (cmd+` / cmd+shift+`) または cmd+option+上下でワークスペースを循環
 # Ghostty が cmd キーを端末に送らないため、Ghostty 側で CSI-u シーケンスに変換して送信 (.ghostty/config 参照)
-next_workspace = "cmd+backtick"
-previous_workspace = "cmd+shift+backtick"
+next_workspace = ["cmd+backtick", "cmd+alt+down"]
+previous_workspace = ["cmd+shift+backtick", "cmd+alt+up"]
 # ctrl+tab / ctrl+shift+tab または prefix+n / prefix+p で Window (タブ) を循環
 # Ghostty がデフォルトで ctrl+tab を自身のタブ切り替えに使うため、Ghostty 側で CSI-u に変換して送信 (.ghostty/config 参照)
 next_tab = ["ctrl+tab", "prefix+n"]
