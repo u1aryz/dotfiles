@@ -18,10 +18,10 @@ new_workspace = "alt+n"
 # Ghostty が cmd キーを端末に送らないため、Ghostty 側で CSI-u シーケンスに変換して送信 (.ghostty/config 参照)
 next_workspace = "cmd+backtick"
 previous_workspace = "cmd+shift+backtick"
-# ctrl+tab / ctrl+shift+tab で Window (タブ) を循環
+# ctrl+tab / ctrl+shift+tab または prefix+n / prefix+p で Window (タブ) を循環
 # Ghostty がデフォルトで ctrl+tab を自身のタブ切り替えに使うため、Ghostty 側で CSI-u に変換して送信 (.ghostty/config 参照)
-next_tab = "ctrl+tab"
-previous_tab = "ctrl+shift+tab"
+next_tab = ["ctrl+tab", "prefix+n"]
+previous_tab = ["ctrl+shift+tab", "prefix+p"]
 
 # 現在のタブを左にhunk、右側に上下2つのプロンプトの構成に変更
 [[keys.command]]
