@@ -1,0 +1,44 @@
+{
+  "lastChangelogVersion": "0.84.2",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
+  "defaultThinkingLevel": "low",
+  "packages": [
+    "npm:@ayulab/pi-rewind",
+    "npm:pi-subagents",
+    "npm:@georgedong32/permission-modes",
+    "npm:pi-manage-dirs",
+    "npm:pi-web-access",
+    "npm:@pi-plugins/usage"
+  ],
+  "subagents": {
+    "defaultModel": "openai-codex/gpt-5.6-sol",
+    "defaultThinking": "low",
+    "agentOverrides": {
+      "scout": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "low"
+      },
+      "researcher": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "low"
+      },
+      "worker": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "medium"
+      },
+      "reviewer": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "high"
+      },
+      "oracle": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "high"
+      },
+      "delegate": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "medium"
+      }
+    }
+  }
+}

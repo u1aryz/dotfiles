@@ -1,0 +1,21 @@
+{
+  "active": "default",
+  "default": {
+    "ask": {
+      "model": "openai-codex/gpt-5.6-sol",
+      "effort": "low"
+    },
+    "plan": {
+      "model": "openai-codex/gpt-5.6-sol",
+      "effort": "xhigh"
+    },
+    "auto": {
+      "model": "openai-codex/gpt-5.6-sol",
+      "effort": "low"
+    },
+    "bypass": {
+      "model": "openai-codex/gpt-5.6-sol",
+      "effort": "low"
+    }
+  }
+}

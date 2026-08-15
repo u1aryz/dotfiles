@@ -1,0 +1,7 @@
+{
+  "classifier": {
+    "enabled": true,
+    "model": "openai-codex/gpt-5.6-luna",
+    "timeoutMs": 8000
+  }
+}
