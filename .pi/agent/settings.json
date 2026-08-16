@@ -9,7 +9,8 @@
     "git:github.com/u1aryz/pi-permission-modes@fix/codex-classifier-temperature",
     "npm:pi-manage-dirs",
     "npm:pi-web-access",
-    "npm:@pi-plugins/usage"
+    "npm:@pi-plugins/usage",
+    "npm:@georgedong32/pi-effort"
   ],
   "subagents": {
     "defaultModel": "openai-codex/gpt-5.6-sol",
