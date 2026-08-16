@@ -9,6 +9,7 @@
     "git:github.com/u1aryz/pi-permission-modes@fix/codex-classifier-temperature",
     "npm:pi-manage-dirs",
     "npm:pi-web-access",
+    "npm:pi-fff",
     "npm:@pi-plugins/usage",
     "npm:@georgedong32/pi-effort"
   ],
