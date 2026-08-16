@@ -23,7 +23,6 @@ abbr -a less bat
 abbr -a find fd
 
 # misc
-abbr -a tmux tmux -u
 abbr -a mkdir mkdir -p
 abbr -a mr mise run
 abbr -a ml mise list
