@@ -25,17 +25,7 @@ function adb_clear_browser -d "Clear selected browser app data on all connected 
     set -q selected_browsers[1]
     or return 0
 
-    set -l packages
-    for browser in $selected_browsers
-        switch $browser
-            case 'Chrome (com.android.chrome)'
-                set -a packages com.android.chrome
-            case 'Chrome Beta (com.chrome.beta)'
-                set -a packages com.chrome.beta
-            case 'Edge (com.microsoft.emmx)'
-                set -a packages com.microsoft.emmx
-        end
-    end
+    set -l packages (string match -r '\(([^()]*)\)$' --groups-only $selected_browsers)
 
     # state が "device" の端末シリアルのみ抽出(unauthorized/offline は除外)
     set -l serials (command adb devices | string trim | string match -r '^(\S+)\s+device$' --groups-only)
