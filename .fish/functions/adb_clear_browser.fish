@@ -1,8 +1,40 @@
-function adb_clear_chrome -d "Clear Chrome and Chrome Beta app data on all connected Android devices"
+function adb_clear_browser -d "Clear selected browser app data on all connected Android devices"
     command -q adb
     or begin
         echo "adb: command not found" >&2
         return 127
+    end
+
+    command -q fzf
+    or begin
+        echo "fzf: command not found" >&2
+        return 127
+    end
+
+    set -l browser_options \
+        'Chrome (com.android.chrome)' \
+        'Chrome Beta (com.chrome.beta)' \
+        'Edge (com.microsoft.emmx)'
+    set -l selected_browsers (printf '%s\n' $browser_options | \
+        fzf --multi --no-input --reverse \
+            --pointer='' --marker='✔ ' --color=marker:white \
+            --bind 'space:toggle' \
+            --bind 'a:transform([ "$FZF_SELECT_COUNT" -eq "$FZF_MATCH_COUNT" ] && echo deselect-all || echo select-all)' \
+            --header 'Space: 選択 / a: 全選択/全解除 / Enter: 実行')
+
+    set -q selected_browsers[1]
+    or return 0
+
+    set -l packages
+    for browser in $selected_browsers
+        switch $browser
+            case 'Chrome (com.android.chrome)'
+                set -a packages com.android.chrome
+            case 'Chrome Beta (com.chrome.beta)'
+                set -a packages com.chrome.beta
+            case 'Edge (com.microsoft.emmx)'
+                set -a packages com.microsoft.emmx
+        end
     end
 
     # state が "device" の端末シリアルのみ抽出(unauthorized/offline は除外)
@@ -14,7 +46,6 @@ function adb_clear_chrome -d "Clear Chrome and Chrome Beta app data on all conne
         return 1
     end
 
-    set -l packages com.android.chrome com.chrome.beta
     set -l total (count $serials)
     set -l failures 0
 
