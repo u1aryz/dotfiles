@@ -16,6 +16,7 @@ link() {
 }
 
 link .gitconfig "$HOME/.gitconfig"
+link .config/git/ignore "$HOME/.config/git/ignore"
 link .karabiner/karabiner.json "$HOME/.config/karabiner/karabiner.json"
 link .ghostty/config "$HOME/.config/ghostty/config"
 link .herdr/config.toml "$HOME/.config/herdr/config.toml"

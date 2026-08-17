@@ -1,0 +1,5 @@
+# Claude Codeのローカル設定
+**/.claude/settings.local.json
+
+# AIエージェントが生成するプランファイル
+plan.md
