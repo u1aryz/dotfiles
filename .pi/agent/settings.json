@@ -43,5 +43,10 @@
       }
     }
   },
-  "theme": "dark"
+  "theme": "dark",
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 65536,
+    "keepRecentTokens": 65536
+  }
 }
