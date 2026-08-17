@@ -14,7 +14,8 @@ function adb_clear_browser -d "Clear selected browser app data on all connected 
     set -l browser_options \
         'Chrome (com.android.chrome)' \
         'Chrome Beta (com.chrome.beta)' \
-        'Edge (com.microsoft.emmx)'
+        'Edge (com.microsoft.emmx)' \
+        'Firefox (org.mozilla.firefox)'
     set -l selected_browsers (printf '%s\n' $browser_options | \
         fzf --multi --no-input --reverse \
             --pointer='' --marker='✔ ' --color=marker:white \
