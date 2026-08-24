@@ -33,6 +33,7 @@ link .pi/agent/permission-modes.json "$HOME/.pi/agent/permission-modes.json"
 link .ccstatusline/settings.json "$HOME/.config/ccstatusline/settings.json"
 link .claude/settings.json "$HOME/.claude/settings.json"
 link .docker/config.json "$HOME/.docker/config.json"
+link .ssh/config "$HOME/.ssh/config"
 link .vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
 
 # .fish/ 配下はファイル単位で再帰リンク(~/.config/fish 内でfisher管理のファイルと共存するため)

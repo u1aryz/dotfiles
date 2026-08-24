@@ -20,6 +20,26 @@ sh link.sh
 
 新しい設定ファイルを追加した場合は、`link.sh` へのマッピング追記と `sh link.sh` の再実行が必要。`.fish/` 配下へのファイル追加はマッピング追記が不要(`sh link.sh` の再実行のみ)。
 
+## SSH
+
+SSH認証には1Password SSH Agentを使用する。1PasswordでSSH Agentを有効にしたうえで、各鍵の公開鍵を次の場所へ保存する。公開鍵ファイルとホスト固有の設定はリポジトリでは管理しない。
+
+- 個人用: `~/.ssh/1password/personal.pub`
+- 仕事用: `~/.ssh/1password/work.pub`
+- ホスト固有の追加設定: `~/.ssh/config.local`
+
+GitHubでは接続先のエイリアスによって鍵を切り替える。
+
+```sh
+# 個人用
+git clone git@github-personal:OWNER/REPOSITORY.git
+
+# 仕事用
+git clone git@github-work:ORGANIZATION/REPOSITORY.git
+```
+
+既存リポジトリは `git remote set-url origin` で同様の接続先へ変更できる。OrbStackのSSH設定は `~/.orbstack/ssh/config` から自動的に読み込む。
+
 ## メンテナンス
 
 設定ファイルの整形は mise のタスクで行う。
