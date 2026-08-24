@@ -24,8 +24,8 @@ sh link.sh
 
 SSH認証には1Password SSH Agentを使用する。1PasswordでSSH Agentを有効にしたうえで、各鍵の公開鍵を次の場所へ保存する。公開鍵ファイルとホスト固有の設定はリポジトリでは管理しない。
 
-- 個人用: `~/.ssh/1password/personal.pub`
-- 仕事用: `~/.ssh/1password/work.pub`
+- 個人用: `~/.ssh/personal.pub`
+- 仕事用: `~/.ssh/work.pub`
 - ホスト固有の追加設定: `~/.ssh/config.local`
 
 GitHubでは接続先のエイリアスによって鍵を切り替える。
