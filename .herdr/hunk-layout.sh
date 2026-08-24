@@ -1,5 +1,5 @@
 #!/bin/sh
-# 現在のタブを左にhunk、右側に上下2つのプロンプトの構成にする
+# 現在のタブを左にhunk、右上にpi、右下にプロンプトの構成にする
 # config.toml の [[keys.command]] から呼ばれる (HERDR_* 環境変数はherdrが渡す)
 set -eu
 
@@ -18,4 +18,5 @@ right_top_pane_id=$(printf '%s\n' "$right_pane" | jq -r '.result.pane.pane_id')
 
 "$HERDR_BIN_PATH" pane split "$right_top_pane_id" --direction down --ratio 0.5 --no-focus >/dev/null
 "$HERDR_BIN_PATH" pane run "$left_pane_id" "hunk diff" >/dev/null
+"$HERDR_BIN_PATH" pane run "$right_top_pane_id" "pi --permission-mode auto" >/dev/null
 "$HERDR_BIN_PATH" pane focus --pane "$left_pane_id" --direction right >/dev/null
