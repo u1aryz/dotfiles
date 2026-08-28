@@ -17,6 +17,7 @@ idiomatic_version_file_enable_tools = ["node"]
 trusted_config_paths = [
   "~/.config/dotfiles",
   "~/ghq/github.com/u1aryz",
+  "~/ghq/github-personal/u1aryz",
   "~/go/src/github.com/u1aryz",
 ]
 
