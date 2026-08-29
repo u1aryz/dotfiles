@@ -27,6 +27,7 @@ abbr -a mkdir mkdir -p
 abbr -a mr mise run
 abbr -a ml mise list
 abbr -a mi mise install
+abbr -a pia pi --permission-mode auto
 
 # function aliases (keep as alias since they call functions)
 alias fco __fzf_checkout
