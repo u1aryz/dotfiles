@@ -10,6 +10,7 @@ pnpm = "latest"
 "npm:@aikidosec/safe-chain" = "latest"
 "npm:cf" = "latest"
 "npm:@earendil-works/pi-coding-agent" = "latest"
+"npm:@playwright/cli" = "latest"
 
 [settings]
 experimental = true
