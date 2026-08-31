@@ -7,6 +7,9 @@
   "editor.formatOnType": false, // 入力した行を自動でフォーマット
   "editor.scrollBeyondLastLine": false, // 最終行よりも下へのスクロールをさせない
   "editor.dragAndDrop": false, // ドラッグアンドドロップでコードの移動をしないようにする
+  "editor.unicodeHighlight.allowedLocales": {
+    "ja": true
+  }, // 日本語をUnicode強調表示の対象外にする
   "files.insertFinalNewline": true, // ファイルの保存時に末尾を改行
   "files.trimTrailingWhitespace": true, // ファイルの保存時に行末の空白をトリミング
   "files.trimFinalNewlines": true, // ファイルの保存時に最終行以降をトリミング
