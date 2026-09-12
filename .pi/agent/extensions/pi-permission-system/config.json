@@ -71,7 +71,13 @@
       "*/git* push +* *": "deny",
       "*/git* push * +* *": "deny"
     },
-    "external_directory_read": "ask",
+    "external_directory_read": {
+      "*": "ask",
+      "/Users/u1aryz/.pi/agent/skills/*": "allow",
+      "/Users/u1aryz/.agents/skills/*": "allow",
+      "/Users/u1aryz/.pi/agent/npm/node_modules/*/skills/*": "allow",
+      "/Users/u1aryz/.pi/agent/npm/node_modules/*/*/skills/*": "allow"
+    },
     "external_directory_write": "deny"
   }
 }
