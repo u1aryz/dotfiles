@@ -7,7 +7,7 @@
     "npm:@gotgenes/pi-permission-system",
     "npm:@erichll/pi-auto-review",
     "npm:@erichll/pi-sandbox",
-    "npm:pi-subagents@0.67.0",
+    "npm:pi-subagents@0.66.0",
     "npm:@ff-labs/pi-fff",
     "npm:pi-web-access",
     "npm:pi-manage-dirs",
