@@ -16,12 +16,14 @@
     "preflightCommandPrefixes": [
       "mise run format",
       "mise run lint",
-      "mise run test",
-      "pnpm format",
-      "pnpm lint",
-      "pnpm test",
-      "pnpm typecheck"
+      "mise run test"
     ],
     "retryOnUnixSocketError": false
+  },
+  "filesystem": {
+    "additionalAllowRead": [
+      "/Users/u1aryz/.local/share/mise/installs",
+      "/Users/u1aryz/.local/share/mise/shims"
+    ]
   }
 }
