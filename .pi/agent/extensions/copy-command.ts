@@ -23,7 +23,7 @@ type SessionContext = {
   };
 };
 
-const SHELL_LANGUAGES = new Set(["", "bash", "fish", "sh", "shell", "zsh"]);
+const SHELL_LANGUAGES = new Set(["fish"]);
 
 function isTextPart(part: unknown): part is TextPart {
   if (!part || typeof part !== "object") return false;
@@ -72,11 +72,12 @@ function latestAssistantText(ctx: SessionContext): string {
 }
 
 function preview(command: string): string {
-  const firstLine = command.split("\n", 1)[0]?.trim() ?? "";
-  if (firstLine.length <= 72) {
-    return firstLine;
-  }
-  return `${firstLine.slice(0, 69)}...`;
+  const lines = command.split("\n");
+  const firstLine = lines[0]?.trim() ?? "";
+  const summary =
+    firstLine.length <= 60 ? firstLine : `${firstLine.slice(0, 57)}...`;
+
+  return lines.length === 1 ? summary : `${summary}（${lines.length}行）`;
 }
 
 async function copyToClipboard(command: string): Promise<void> {
@@ -111,7 +112,7 @@ export default function copyCommandExtension(pi: ExtensionAPI): void {
         const candidates = extractCommands(latestAssistantText(ctx));
         if (candidates.length === 0) {
           ctx.ui.notify(
-            "直前の回答にシェルのコードブロックがありません",
+            "直前の回答にfishのコードブロックがありません",
             "warning",
           );
           return;
