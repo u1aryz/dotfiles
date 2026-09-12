@@ -1,10 +1,10 @@
 [tools]
-taplo = "latest"
+tombi = "latest"
 prettier = "latest"
 
 [tasks.format]
 run = [
   "find .fish -type f -name '*.fish' -exec fish_indent -w {} +",
-  "taplo format '*.toml' '.*/*.toml'",
+  "tombi format --offline",
   "prettier --write '**/*.json' '!.pi/projects/**'",
 ]
