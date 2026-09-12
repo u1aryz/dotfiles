@@ -70,7 +70,6 @@
       "*/git* push * -6*f* *": "deny",
       "*/git* push +* *": "deny",
       "*/git* push * +* *": "deny"
-    },
-    "external_directory": "ask"
+    }
   }
 }
