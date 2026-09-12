@@ -18,5 +18,5 @@ right_top_pane_id=$(printf '%s\n' "$right_pane" | jq -r '.result.pane.pane_id')
 
 "$HERDR_BIN_PATH" pane split "$right_top_pane_id" --direction down --ratio 0.5 --no-focus >/dev/null
 "$HERDR_BIN_PATH" pane run "$left_pane_id" "hunk diff" >/dev/null
-"$HERDR_BIN_PATH" pane run "$right_top_pane_id" "pi --permission-mode auto" >/dev/null
+"$HERDR_BIN_PATH" pane run "$right_top_pane_id" "pi" >/dev/null
 "$HERDR_BIN_PATH" pane focus --pane "$left_pane_id" --direction right >/dev/null
