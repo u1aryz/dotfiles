@@ -1,0 +1,14 @@
+{
+  "subagents": {
+    "provider": "pi-subagents",
+    "protection": "native-background-tools",
+    "allowedNativeAgents": [
+      "scout",
+      "researcher",
+      "worker",
+      "reviewer",
+      "oracle",
+      "delegate"
+    ]
+  }
+}

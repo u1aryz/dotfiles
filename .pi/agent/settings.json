@@ -4,13 +4,15 @@
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "low",
   "packages": [
-    "npm:@ayulab/pi-rewind",
-    "npm:@pi-plugins/usage",
+    "npm:@gotgenes/pi-permission-system",
+    "npm:@erichll/pi-auto-review",
+    "npm:@erichll/pi-sandbox",
+    "npm:pi-subagents@0.67.0",
     "npm:@ff-labs/pi-fff",
+    "npm:pi-web-access",
     "npm:pi-manage-dirs",
-    "git:github.com/u1aryz/pi-permission-modes@fix/codex-classifier-temperature",
-    "npm:pi-subagents",
-    "npm:pi-web-access"
+    "npm:@ayulab/pi-rewind",
+    "npm:@pi-plugins/usage"
   ],
   "subagents": {
     "defaultModel": "openai-codex/gpt-5.6-sol",
