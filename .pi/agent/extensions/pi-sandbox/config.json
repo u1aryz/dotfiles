@@ -10,5 +10,18 @@
       "oracle",
       "delegate"
     ]
+  },
+  "hostIPC": {
+    "mode": "ask",
+    "preflightCommandPrefixes": [
+      "mise run format",
+      "mise run lint",
+      "mise run test",
+      "pnpm format",
+      "pnpm lint",
+      "pnpm test",
+      "pnpm typecheck"
+    ],
+    "retryOnUnixSocketError": false
   }
 }
