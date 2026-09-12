@@ -4,9 +4,9 @@
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "low",
   "packages": [
-    "npm:@gotgenes/pi-permission-system",
-    "npm:@erichll/pi-auto-review",
-    "npm:@erichll/pi-sandbox",
+    "npm:@gotgenes/pi-permission-system@32.0.2",
+    "npm:@erichll/pi-auto-review@0.18.1",
+    "npm:@erichll/pi-sandbox@0.18.0",
     "npm:pi-subagents@0.66.0",
     "npm:@ff-labs/pi-fff",
     "npm:pi-web-access",
