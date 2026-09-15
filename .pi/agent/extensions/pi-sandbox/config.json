@@ -11,19 +11,16 @@
       "delegate"
     ]
   },
-  "hostIPC": {
-    "mode": "ask",
-    "preflightCommandPrefixes": [
-      "mise run format",
-      "mise run lint",
-      "mise run test"
-    ],
-    "retryOnUnixSocketError": false
-  },
   "filesystem": {
     "additionalAllowRead": [
-      "/Users/u1aryz/.local/share/mise/installs",
-      "/Users/u1aryz/.local/share/mise/shims"
+      "/Users/u1aryz/.local/share/mise",
+      "/Users/u1aryz/.local/state/mise",
+      "/Users/u1aryz/Library/Caches/mise"
     ]
+  },
+  "hostIPC": {
+    "mode": "ask",
+    "preflightCommandPrefixes": ["playwright-cli"],
+    "retryOnUnixSocketError": true
   }
 }

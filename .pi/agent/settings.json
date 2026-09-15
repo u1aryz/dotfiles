@@ -8,11 +8,11 @@
     "npm:@erichll/pi-auto-review@0.18.1",
     "npm:@erichll/pi-sandbox@0.18.0",
     "npm:pi-subagents@0.66.0",
-    "npm:@ff-labs/pi-fff",
-    "npm:pi-web-access",
-    "npm:pi-manage-dirs",
     "npm:@ayulab/pi-rewind",
-    "npm:@pi-plugins/usage"
+    "npm:@ff-labs/pi-fff",
+    "npm:@pi-plugins/usage",
+    "npm:pi-manage-dirs",
+    "npm:pi-web-access"
   ],
   "subagents": {
     "defaultModel": "openai-codex/gpt-5.6-sol",
