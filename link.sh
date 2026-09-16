@@ -4,11 +4,18 @@
 set -eu
 
 dotfiles_dir=$(cd "$(dirname "$0")" && pwd)
+state_dir=${XDG_STATE_HOME:-"$HOME/.local/state"}/dotfiles
+link_state_file="$state_dir/links"
+
+mkdir -p "$state_dir"
+current_link_state=$(mktemp "$state_dir/links.XXXXXX")
+trap 'rm -f "$current_link_state"' 0
 
 # 既に正しいリンクが張られていれば何もしない(変更したリンクのみ出力する)
 link() {
 	src="$dotfiles_dir/$1"
 	dest="$2"
+	printf '%s\t%s\n' "$src" "$dest" >>"$current_link_state"
 	[ "$(readlink "$dest" 2>/dev/null || true)" = "$src" ] && return 0
 	if [ -e "$dest" ] || [ -L "$dest" ]; then
 		echo "error: 既存のファイルまたはリンクがあります: $dest" >&2
@@ -18,6 +25,28 @@ link() {
 	mkdir -p "$(dirname "$dest")"
 	ln -s "$src" "$dest"
 	echo "link: $dest -> $src"
+}
+
+# 前回の管理対象から外れたリンクのうち、リンク先が削除済みのものだけを削除する
+cleanup_stale_links() {
+	[ -f "$link_state_file" ] || return 0
+	tab=$(printf '\t')
+	while IFS="$tab" read -r old_src old_dest; do
+		old_record=$(printf '%s\t%s' "$old_src" "$old_dest")
+		grep -Fqx "$old_record" "$current_link_state" && continue
+		case "$old_src" in
+			"$dotfiles_dir"/*) ;;
+			*) continue ;;
+		esac
+		case "$old_dest" in
+			"$HOME"/*) ;;
+			*) continue ;;
+		esac
+		[ ! -e "$old_dest" ] || continue
+		[ "$(readlink "$old_dest" 2>/dev/null || true)" = "$old_src" ] || continue
+		rm "$old_dest"
+		echo "unlink: $old_dest"
+	done <"$link_state_file"
 }
 
 link .gitconfig "$HOME/.gitconfig"
@@ -49,3 +78,7 @@ cd "$dotfiles_dir/.fish"
 find . -type f ! -name '.DS_Store' | while IFS= read -r f; do
 	link ".fish/${f#./}" "$HOME/.config/fish/${f#./}"
 done
+
+cleanup_stale_links
+mv "$current_link_state" "$link_state_file"
+trap - 0
