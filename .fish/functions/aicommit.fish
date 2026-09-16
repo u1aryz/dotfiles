@@ -22,10 +22,16 @@ function aicommit -d "Generate and select AI-powered commit messages"
         return 0
     end
 
-    # Check if there are staged changes (exclude lock files from diff)
-    set -l diff_output (git diff --cached -- . ':!*.lock' ':!package-lock.json' ':!pnpm-lock.yaml' 2>&1)
+    # Gitルートを基準にステージ済みの変更を取得する(ロックファイルを除く)
+    set -l git_root (git rev-parse --show-toplevel 2>/dev/null)
     or begin
-        echo "エラー: gitリポジトリではないか、gitコマンドが失敗しました"
+        echo "エラー: gitリポジトリではありません"
+        return 1
+    end
+
+    set -l diff_output (git -C "$git_root" diff --cached -- . ':!*.lock' ':!package-lock.json' ':!pnpm-lock.yaml' 2>&1)
+    or begin
+        echo "エラー: git diffの取得に失敗しました"
         return 1
     end
 
@@ -68,7 +74,7 @@ function aicommit -d "Generate and select AI-powered commit messages"
     end
 
     # Get git status for context (only staged files)
-    set -l git_status (git diff --cached --name-status)
+    set -l git_status (git -C "$git_root" diff --cached --name-status)
 
     # Prepare prompt
     set -l lang_instruction (test "$lang" = ja; and echo "in Japanese"; or echo "in English")
@@ -156,7 +162,7 @@ Output only the numbered messages in the above format. No explanations needed."
     end
 
     # Perform the commit
-    if git commit -m "$selected"
+    if git -C "$git_root" commit -m "$selected"
         echo "コミットが完了しました: $selected"
     else
         echo "エラー: コミットに失敗しました"
