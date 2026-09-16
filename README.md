@@ -46,4 +46,4 @@ git clone git@github-work:ORGANIZATION/REPOSITORY.git
 mise run format
 ```
 
-fish_indent(fish)、taplo(TOML)、prettier(JS/JSON)が対象ファイルを整形する。
+fish_indent(fish)、tombi(TOML)、prettier(JS/JSON)が対象ファイルを整形する。
