@@ -27,6 +27,24 @@ link() {
 	echo "link: $dest -> $src"
 }
 
+# リポジトリ側を正として通常ファイルを配置する
+copy_file() {
+	src="$dotfiles_dir/$1"
+	dest="$2"
+	dest_dir=$(dirname "$dest")
+	mkdir -p "$dest_dir"
+	tmp=$(mktemp "$dest_dir/.dotfiles-copy.XXXXXX")
+	if ! cp "$src" "$tmp"; then
+		rm -f "$tmp"
+		return 1
+	fi
+	if ! mv -f "$tmp" "$dest"; then
+		rm -f "$tmp"
+		return 1
+	fi
+	echo "copy: $src -> $dest"
+}
+
 # 前回の管理対象から外れたリンクのうち、リンク先が削除済みのものだけを削除する
 cleanup_stale_links() {
 	[ -f "$link_state_file" ] || return 0
@@ -60,6 +78,8 @@ link .hunk/config.toml "$HOME/.config/hunk/config.toml"
 link .mise/config.toml "$HOME/.config/mise/config.toml"
 link .pi/agent/AGENTS.md "$HOME/.pi/agent/AGENTS.md"
 link .pi/agent/settings.json "$HOME/.pi/agent/settings.json"
+# pi-plan-modeはシンボリックリンクされた設定ファイルを読み込めないため、通常ファイルとして配置する
+copy_file .pi/agent/pi-plan-mode.json "$HOME/.pi/agent/pi-plan-mode.json"
 link .pi/agent/models.json "$HOME/.pi/agent/models.json"
 link .pi/agent/agents/readonly-workflow-reviewer.md "$HOME/.pi/agent/agents/readonly-workflow-reviewer.md"
 link .pi/agent/extensions/copy-command.ts "$HOME/.pi/agent/extensions/copy-command.ts"
