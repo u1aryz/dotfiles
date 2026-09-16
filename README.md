@@ -4,7 +4,7 @@ macOS用の個人dotfiles。fish + Ghostty + herdr を中心とした環境の�
 
 ## セットアップ
 
-cloneして `link.sh` を実行する。冪等なので何度実行しても安全(変更したリンクのみ出力する)。
+cloneして `link.sh` を実行する。既に正しいリンクがあれば何もせず、変更したリンクのみ出力する。リンク先に通常ファイルや異なるリンクがある場合は上書きせずエラー終了するため、既存の内容を退避または削除してから再実行する。
 
 ```sh
 git clone git@github.com:u1aryz/dotfiles.git ~/.config/dotfiles

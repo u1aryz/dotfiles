@@ -10,8 +10,13 @@ link() {
 	src="$dotfiles_dir/$1"
 	dest="$2"
 	[ "$(readlink "$dest" 2>/dev/null || true)" = "$src" ] && return 0
+	if [ -e "$dest" ] || [ -L "$dest" ]; then
+		echo "error: 既存のファイルまたはリンクがあります: $dest" >&2
+		echo "既存の内容を退避または削除してから再実行してください" >&2
+		return 1
+	fi
 	mkdir -p "$(dirname "$dest")"
-	ln -sfn "$src" "$dest"
+	ln -s "$src" "$dest"
 	echo "link: $dest -> $src"
 }
 
