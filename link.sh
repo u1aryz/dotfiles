@@ -46,6 +46,6 @@ link .vscode/settings.json "$HOME/Library/Application Support/Code/User/settings
 
 # .fish/ 配下はファイル単位で再帰リンク(~/.config/fish 内でfisher管理のファイルと共存するため)
 cd "$dotfiles_dir/.fish"
-find . -type f | while IFS= read -r f; do
+find . -type f ! -name '.DS_Store' | while IFS= read -r f; do
 	link ".fish/${f#./}" "$HOME/.config/fish/${f#./}"
 done
