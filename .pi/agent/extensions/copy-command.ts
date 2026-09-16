@@ -53,7 +53,7 @@ function extractCommands(markdown: string): Candidate[] {
     const language = (match[1] ?? "").trim().toLowerCase();
     const command = (match[2] ?? "").trim();
     if (SHELL_LANGUAGES.has(language) && command) {
-      candidates.push({ command, language: language || "shell" });
+      candidates.push({ command, language });
     }
   }
 
