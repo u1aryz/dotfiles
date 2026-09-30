@@ -1,5 +1,5 @@
 {
-  "model": "openai-codex/gpt-5.6-sol",
+  "model": "openai-codex/gpt-6.1-sol",
   "reasoning": "low",
   "autoConfirmBoundedAllows": ["path"]
 }
