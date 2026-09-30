@@ -1,8 +1,12 @@
 {
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "0.99.1",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "low",
+  "defaultTools": ["+codemode"],
+  "codemode": {
+    "mode": "only"
+  },
   "packages": [
     "npm:@gotgenes/pi-permission-system@32.0.2",
     "npm:@erichll/pi-auto-review@0.18.1",
