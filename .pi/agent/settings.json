@@ -9,8 +9,6 @@
   },
   "packages": [
     "npm:@gotgenes/pi-permission-system@36.2.0",
-    "npm:@erichll/pi-auto-review@0.22.0",
-    "npm:@erichll/pi-sandbox@0.22.0",
     "npm:@narumitw/pi-plan-mode",
     "npm:pi-subagents@0.66.0",
     "npm:@ayulab/pi-rewind",

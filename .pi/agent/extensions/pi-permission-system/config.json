@@ -1,5 +1,4 @@
 {
-  "authorizerChain": ["pi-auto-review"],
   "permission": {
     "*": "allow",
     "path": {
@@ -11,19 +10,17 @@
       "~/.ssh/*": "deny",
       "~/.ssh/*.pub": "allow",
       "~/.ssh/config": "allow",
-      "~/.ssh/known_hosts": "allow"
+      "~/.ssh/known_hosts": "allow",
+      "~/.pi/agent/auth.json": "deny",
+      "~/.aws/credentials": "deny",
+      "~/.aws/sso/cache": "deny",
+      "~/.aws/sso/cache/*": "deny",
+      "~/.config/gcloud/application_default_credentials.json": "deny",
+      "~/.config/gcloud/credentials.db": "deny",
+      "~/.config/gcloud/access_tokens.db": "deny"
     },
     "bash": {
-      "*": "ask",
-      "pwd": "allow",
-      "git status": "allow",
-      "git status *": "allow",
-      "git diff": "allow",
-      "git diff *": "allow",
-      "git add": "allow",
-      "git add *": "allow",
-      "git commit": "allow",
-      "git commit *": "allow",
+      "*": "allow",
       "sudo *": "deny",
       "*/sudo *": "deny",
       "git* push --force *": "deny",
@@ -71,7 +68,6 @@
       "*/git* push +* *": "deny",
       "*/git* push * +* *": "deny"
     },
-    "external_directory_read": "allow",
-    "external_directory_write": "ask"
+    "external_directory": "allow"
   }
 }
