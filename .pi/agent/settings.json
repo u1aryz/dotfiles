@@ -8,9 +8,9 @@
     "mode": "only"
   },
   "packages": [
-    "npm:@gotgenes/pi-permission-system@36.2.0",
+    "npm:@gotgenes/pi-permission-system",
     "npm:@narumitw/pi-plan-mode",
-    "npm:pi-subagents@0.66.0",
+    "npm:pi-subagents",
     "npm:@ayulab/pi-rewind",
     "npm:@ff-labs/pi-fff",
     "npm:@pi-plugins/usage",
