@@ -1,4 +1,6 @@
 # Environment variables
+# 日本語をUTF-8として扱う
+set -gx LANG en_US.UTF-8
 set -gx ANDROID_HOME /opt/homebrew/share/android-commandlinetools
 set -gx JAVA_HOME /opt/homebrew/opt/openjdk
 set -gx EDITOR 'code --new-window'
