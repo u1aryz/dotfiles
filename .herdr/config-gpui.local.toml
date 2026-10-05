@@ -1,6 +1,6 @@
 # Herdr GPUI のユーザー設定。未指定の項目は既定値を継承し、保存時に自動反映される
 layout = "comfortable-rounded"
-theme = "Builtin Pastel Dark"
+theme = "Zenwritten Dark"
 
 [keybindings]
 # prefix+Shift+H は hunk-layout.sh 用に空け、左ペインとの交換を無効化する
