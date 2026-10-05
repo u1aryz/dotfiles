@@ -30,6 +30,19 @@ type = "shell"
 command = "sh ~/.config/herdr/hunk-layout.sh"
 description = "現在のタブを3ペイン構成に変更"
 
+# cmd+左右で入力行の先頭・末尾に移動する (Herdr GPUI 用)
+[[keys.command]]
+key = "cmd+left"
+type = "shell"
+command = '"$HERDR_BIN_PATH" pane send-keys "$HERDR_ACTIVE_PANE_ID" ctrl+a'
+description = "入力行の先頭に移動"
+
+[[keys.command]]
+key = "cmd+right"
+type = "shell"
+command = '"$HERDR_BIN_PATH" pane send-keys "$HERDR_ACTIVE_PANE_ID" ctrl+e'
+description = "入力行の末尾に移動"
+
 # option + 矢印キーはペイン優先のハイブリッド移動 (nav.sh 参照)
 # その方向にペインがあればペイン移動、なければ左右=タブ移動 (上下はペイン移動のみ)
 [[keys.command]]
