@@ -1,5 +1,5 @@
 # Herdr GPUI のユーザー設定。未指定の項目は既定値を継承し、保存時に自動反映される
-layout = "comfortable-rounded"
+layout = "normal-rounded"
 theme = "Zenwritten Dark"
 
 [keybindings]
