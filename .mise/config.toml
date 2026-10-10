@@ -2,13 +2,14 @@
 GITHUB_API_TOKEN = "{{ exec(command='gh auth token 2>/dev/null || true') }}"
 
 [tools]
-node = "latest"
-pnpm = "latest"
+node = { version = "latest", auto_update = true }
+pnpm = { version = "latest", auto_update = true }
 
-"github:u1aryz/ffprompt" = "latest"
-"go:github.com/mattn/speedc" = "latest"
-"npm:@aikidosec/safe-chain" = "latest"
-"npm:cf" = "latest"
+# 非公開リポジトリの認証は、シェル環境のない更新サービスでも動的に取得する
+"github:u1aryz/ffprompt" = { version = "latest", auto_update = true, install_env = { GITHUB_API_TOKEN = "{{ exec(command='gh auth token 2>/dev/null || true') }}" } }
+"go:github.com/mattn/speedc" = { version = "latest", auto_update = true }
+"npm:@aikidosec/safe-chain" = { version = "latest", auto_update = true }
+"npm:cf" = { version = "latest", auto_update = true }
 "npm:@earendil-works/pi-coding-agent" = "1.0.2"
 # Microsoft ESRP経由の正規リリースにはnpm provenanceがないため、CLIと依存パッケージのこのバージョンのみ信頼ポリシーの対象外にする
 "npm:@playwright/cli" = { version = "0.1.19", trust_policy_excludes = [
@@ -27,6 +28,16 @@ trusted_config_paths = [
   "~/go/src/github.com/u1aryz",
 ]
 
+# 頻繁な更新を避け、最新追従のツールは週1回の間隔で自動更新する
+[settings.tool_update]
+check_duration = "7d"
+
 [settings.status]
 show_tools = true
 show_env = true
+
+# PATHから直接実行するツールも、標準サービスでバックグラウンド更新する
+[bootstrap.services.mise-tool-update]
+builtin = "tool-update"
+# launchdの標準PATHにはHomebrewが含まれないため、ghなどを利用可能にする
+environment = { PATH = "/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin" }
