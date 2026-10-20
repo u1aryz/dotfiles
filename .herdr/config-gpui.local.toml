@@ -9,6 +9,9 @@ swap_pane_left = []
 # Shift+Enter の Alt+Enter への変換を無効化し、Pi での改行を維持する
 [pane_keys]
 "shift-enter" = ""
+# 単語移動への変換を無効化し、config.toml のペイン優先・タブ移動を使用する
+"alt-left" = ""
+"alt-right" = ""
 
 [terminal]
 size = 12.0
