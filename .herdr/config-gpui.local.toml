@@ -6,5 +6,9 @@ theme = "Zenwritten Dark"
 # prefix+Shift+H は hunk-layout.sh 用に空け、左ペインとの交換を無効化する
 swap_pane_left = []
 
+# Shift+Enter の Alt+Enter への変換を無効化し、Pi での改行を維持する
+[pane_keys]
+"shift-enter" = ""
+
 [terminal]
 size = 12.0
