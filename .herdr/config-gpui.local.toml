@@ -12,3 +12,8 @@ swap_pane_left = []
 
 [terminal]
 size = 12.0
+
+# ウィンドウ背景の透過とぼかし
+[backdrop]
+opacity = 0.95
+blur = true
