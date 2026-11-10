@@ -17,7 +17,8 @@
     "npm:@ff-labs/pi-fff",
     "npm:@pi-plugins/usage",
     "npm:pi-manage-dirs",
-    "npm:pi-web-access"
+    "npm:pi-web-access",
+    "npm:@justjoshn/pi-xai-oauth"
   ],
   "subagents": {
     "defaultModel": "openai-codex/gpt-6.1-sol",
