@@ -29,7 +29,9 @@ function aicommit -d "Generate and select AI-powered commit messages"
         return 1
     end
 
-    set -l diff_output (git -C "$git_root" diff --cached -- . ':!*.lock' ':!package-lock.json' ':!pnpm-lock.yaml' 2>&1)
+    # string collectで改行を保持したまま1つの文字列として受け取る
+    set -l diff_output (git -C "$git_root" diff --cached -- . ':!*.lock' ':!package-lock.json' ':!pnpm-lock.yaml' 2>&1 | string collect)
+    test $pipestatus[1] -eq 0
     or begin
         echo "エラー: git diffの取得に失敗しました"
         return 1
@@ -74,7 +76,7 @@ function aicommit -d "Generate and select AI-powered commit messages"
     end
 
     # Get git status for context (only staged files)
-    set -l git_status (git -C "$git_root" diff --cached --name-status)
+    set -l git_status (git -C "$git_root" diff --cached --name-status | string collect)
 
     # Prepare prompt
     set -l lang_instruction (test "$lang" = ja; and echo "in Japanese"; or echo "in English")
@@ -116,7 +118,7 @@ Output only the numbered messages in the above format. No explanations needed."
     set -l stdout_file (mktemp)
     set -l stderr_file (mktemp)
 
-    echo "$prompt" >$prompt_file
+    printf '%s\n' "$prompt" >$prompt_file
 
     set -l ai_cmd pi --model $pi_model --no-session -p
 
@@ -124,8 +126,8 @@ Output only the numbered messages in the above format. No explanations needed."
     timeout --foreground $TIMEOUT_SECONDS $ai_cmd <$prompt_file >$stdout_file 2>$stderr_file
     set -l ai_status $status
 
-    set -l ai_stdout (cat $stdout_file)
-    set -l ai_stderr (cat $stderr_file)
+    set -l ai_stdout (string collect <$stdout_file)
+    set -l ai_stderr (string collect <$stderr_file)
 
     rm -f $prompt_file $stdout_file $stderr_file
 
@@ -141,7 +143,7 @@ Output only the numbered messages in the above format. No explanations needed."
     end
 
     # Parse the output to extract commit messages
-    set -l messages (echo "$ai_stdout" | sed -E 's/ ([0-9]+)\. /\n\1. /g' | grep '^\d\.' | sed -E 's/^[0-9]+\. //')
+    set -l messages (string split \n -- "$ai_stdout" | string match -r --groups-only '^\s*[0-9]+\.\s+(.+?)\s*$')
 
     # Check if we found any messages
     set -l message_count (count $messages)
