@@ -3,7 +3,7 @@
 set -gx LANG en_US.UTF-8
 set -gx ANDROID_HOME /opt/homebrew/share/android-commandlinetools
 set -gx JAVA_HOME /opt/homebrew/opt/openjdk
-set -gx EDITOR 'code --new-window'
+set -gx EDITOR 'code --wait --new-window'
 set -gx FZF_DEFAULT_OPTS '--height 40% --reverse --inline-info'
 set -gx RUNEWIDTH_EASTASIAN 0
 set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
