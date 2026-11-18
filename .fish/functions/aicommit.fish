@@ -82,9 +82,12 @@ function aicommit -d "Generate and select AI-powered commit messages"
     set -l lang_instruction (test "$lang" = ja; and echo "in Japanese"; or echo "in English")
     set -l subject_style_instruction
     if test "$lang" = ja
-        set subject_style_instruction "- subject should be a concise noun phrase in Japanese\n- avoid verb endings such as: する, した, している\n- prefer subjects like: Codex呼び出しの最新化, 設定文言の整理"
+        set subject_style_instruction "- subject should be a concise noun phrase in Japanese
+- avoid verb endings such as: する, した, している
+- prefer subjects like: Codex呼び出しの最新化, 設定文言の整理"
     else
-        set subject_style_instruction "- subject must use imperative mood, not progressive/gerund form\n- avoid subjects like: adding, updating, fixing, refactoring"
+        set subject_style_instruction "- subject must use imperative mood, not progressive/gerund form
+- avoid subjects like: adding, updating, fixing, refactoring"
     end
 
     set -l prompt "Analyze the following git diff and git status, then suggest 3 conventional commit messages $lang_instruction.
