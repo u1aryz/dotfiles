@@ -2,8 +2,8 @@
   "$schema": "https://pi.dev/schemas/settings.schema.json",
   "lastChangelogVersion": "1.5.2",
   "selfUpdateCommand": ["mise", "use", "-g", "npm:{packageName}@{version}"],
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6.1-sol",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "low",
   "defaultTools": ["+codemode"],
   "codemode": {
@@ -21,31 +21,31 @@
     "npm:@justjoshn/pi-xai-oauth"
   ],
   "subagents": {
-    "defaultModel": "openai-codex/gpt-6.1-sol",
+    "defaultModel": "anthropic/claude-opus-5-5",
     "defaultThinking": "low",
     "agentOverrides": {
       "scout": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "anthropic/claude-opus-5-5",
         "thinking": "low"
       },
       "researcher": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "anthropic/claude-opus-5-5",
         "thinking": "low"
       },
       "worker": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "anthropic/claude-opus-5-5",
         "thinking": "medium"
       },
       "reviewer": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "anthropic/claude-opus-5-5",
         "thinking": "high"
       },
       "oracle": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "anthropic/claude-opus-5-5",
         "thinking": "high"
       },
       "delegate": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "anthropic/claude-opus-5-5",
         "thinking": "medium"
       }
     }
