@@ -25,7 +25,6 @@ trusted_config_paths = [
   "~/.config/dotfiles",
   "~/ghq/github.com/u1aryz",
   "~/ghq/github-personal/u1aryz",
-  "~/go/src/github.com/u1aryz",
 ]
 
 # 頻繁な更新を避け、最新追従のツールは週1回の間隔で自動更新する
