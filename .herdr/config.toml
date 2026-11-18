@@ -23,7 +23,7 @@ previous_workspace = ["cmd+shift+backtick", "cmd+alt+up"]
 next_tab = ["ctrl+tab", "prefix+n"]
 previous_tab = ["ctrl+shift+tab", "prefix+p"]
 
-# 現在のタブを左にhunk、右側に上下2つのプロンプトの構成に変更
+# 現在のタブを左にhunk、右上にpi、右下にプロンプトの構成に変更
 [[keys.command]]
 key = "prefix+shift+h"
 type = "shell"
