@@ -9,7 +9,6 @@ abbr -a gd git diff
 abbr -a gf git fetch
 abbr -a gdc git diff --cached
 abbr -a gg git graph
-abbr -a gghq GHQ_ROOT=~/go/src ghq
 
 # eza (ls replacement)
 abbr -a ls eza
